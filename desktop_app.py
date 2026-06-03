@@ -87,7 +87,7 @@ def is_binary_file(path: Path):
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("Antigravity — Git Threat Shield")
+        self.title("Adaptive Threat Detection — Git Threat Shield")
         self.geometry("1100x720")
         self.minsize(900, 600)
         self.configure(fg_color=BG_DARK)
@@ -149,7 +149,7 @@ class App(ctk.CTk):
         self.sidebar.pack(side="left", fill="y")
         self.sidebar.pack_propagate(False)
 
-        ctk.CTkLabel(self.sidebar, text="ANTIGRAVITY", font=ctk.CTkFont(size=15, weight="bold"),
+        ctk.CTkLabel(self.sidebar, text="ADAPTIVE THREAT\nDETECTION", font=ctk.CTkFont(size=12, weight="bold"),
                      text_color=ACCENT).pack(pady=(28, 2))
         ctk.CTkLabel(self.sidebar, text="Git Threat Shield", font=ctk.CTkFont(size=11),
                      text_color=MUTED).pack(pady=(0, 28))
