@@ -668,37 +668,58 @@ class App(ctk.CTk):
         
         # Large dashboard metrics widgets
         metrics_inner = ctk.CTkFrame(metrics_card, fg_color="transparent")
-        metrics_inner.pack(fill="x", padx=20, pady=10)
+        metrics_inner.pack(fill="both", expand=True, padx=20, pady=10)
         
-        # Grid layout for large numbers
+        # Grid layout for baseline vs candidate
         metrics_inner.columnconfigure(0, weight=1)
         metrics_inner.columnconfigure(1, weight=1)
+        metrics_inner.rowconfigure(0, weight=1)
         
-        # Accuracy Container
-        acc_box = ctk.CTkFrame(metrics_inner, fg_color="#0a101d", corner_radius=10)
-        acc_box.grid(row=0, column=0, sticky="nsew", padx=(0, 6), pady=6)
-        ctk.CTkLabel(acc_box, text="ACCURACY", font=ctk.CTkFont(size=10, weight="bold"), text_color=MUTED).pack(pady=(10, 2))
+        # Baseline Card (Left)
+        base_box = ctk.CTkFrame(metrics_inner, fg_color="#0a101d", corner_radius=10, border_width=1, border_color="#1a2332")
+        base_box.grid(row=0, column=0, sticky="nsew", padx=(0, 8), pady=6)
         
-        acc_vals = ctk.CTkFrame(acc_box, fg_color="transparent")
-        acc_vals.pack(pady=(0, 10))
-        self.base_acc_lbl = ctk.CTkLabel(acc_vals, text="—", font=ctk.CTkFont(size=18, weight="bold"), text_color=MUTED)
-        self.base_acc_lbl.pack(side="left")
-        ctk.CTkLabel(acc_vals, text=" → ", font=ctk.CTkFont(size=12), text_color=MUTED).pack(side="left")
-        self.cand_acc_lbl = ctk.CTkLabel(acc_vals, text="—", font=ctk.CTkFont(size=20, weight="bold"), text_color=ACCENT)
-        self.cand_acc_lbl.pack(side="left")
+        ctk.CTkLabel(base_box, text="🛡️  BASELINE MODEL (CURRENT)", font=ctk.CTkFont(size=11, weight="bold"), text_color=MUTED).pack(pady=(12, 8))
         
-        # Recall Container
-        rec_box = ctk.CTkFrame(metrics_inner, fg_color="#0a101d", corner_radius=10)
-        rec_box.grid(row=0, column=1, sticky="nsew", padx=(6, 0), pady=6)
-        ctk.CTkLabel(rec_box, text="MALWARE RECALL", font=ctk.CTkFont(size=10, weight="bold"), text_color=MUTED).pack(pady=(10, 2))
+        base_stats_frame = ctk.CTkFrame(base_box, fg_color="transparent")
+        base_stats_frame.pack(fill="x", padx=16, pady=4)
         
-        rec_vals = ctk.CTkFrame(rec_box, fg_color="transparent")
-        rec_vals.pack(pady=(0, 10))
-        self.base_rec_lbl = ctk.CTkLabel(rec_vals, text="—", font=ctk.CTkFont(size=18, weight="bold"), text_color=MUTED)
-        self.base_rec_lbl.pack(side="left")
-        ctk.CTkLabel(rec_vals, text=" → ", font=ctk.CTkFont(size=12), text_color=MUTED).pack(side="left")
-        self.cand_rec_lbl = ctk.CTkLabel(rec_vals, text="—", font=ctk.CTkFont(size=20, weight="bold"), text_color=ACCENT)
-        self.cand_rec_lbl.pack(side="left")
+        # Accuracy row
+        base_acc_row = ctk.CTkFrame(base_stats_frame, fg_color="transparent")
+        base_acc_row.pack(fill="x", pady=4)
+        ctk.CTkLabel(base_acc_row, text="Accuracy:", font=ctk.CTkFont(size=12), text_color=MUTED).pack(side="left")
+        self.base_acc_lbl = ctk.CTkLabel(base_acc_row, text="—", font=ctk.CTkFont(size=16, weight="bold"), text_color="white")
+        self.base_acc_lbl.pack(side="right")
+        
+        # Recall row
+        base_rec_row = ctk.CTkFrame(base_stats_frame, fg_color="transparent")
+        base_rec_row.pack(fill="x", pady=4)
+        ctk.CTkLabel(base_rec_row, text="Malware Recall:", font=ctk.CTkFont(size=12), text_color=MUTED).pack(side="left")
+        self.base_rec_lbl = ctk.CTkLabel(base_rec_row, text="—", font=ctk.CTkFont(size=16, weight="bold"), text_color="white")
+        self.base_rec_lbl.pack(side="right")
+        
+        # Candidate Card (Right)
+        cand_box = ctk.CTkFrame(metrics_inner, fg_color="#0d1f30", corner_radius=10, border_width=1, border_color=ACCENT)
+        cand_box.grid(row=0, column=1, sticky="nsew", padx=(8, 0), pady=6)
+        
+        ctk.CTkLabel(cand_box, text="🧠  EVOLVED CANDIDATE", font=ctk.CTkFont(size=11, weight="bold"), text_color=ACCENT).pack(pady=(12, 8))
+        
+        cand_stats_frame = ctk.CTkFrame(cand_box, fg_color="transparent")
+        cand_stats_frame.pack(fill="x", padx=16, pady=4)
+        
+        # Accuracy row
+        cand_acc_row = ctk.CTkFrame(cand_stats_frame, fg_color="transparent")
+        cand_acc_row.pack(fill="x", pady=4)
+        ctk.CTkLabel(cand_acc_row, text="Accuracy:", font=ctk.CTkFont(size=12), text_color=MUTED).pack(side="left")
+        self.cand_acc_lbl = ctk.CTkLabel(cand_acc_row, text="—", font=ctk.CTkFont(size=18, weight="bold"), text_color=SUCCESS)
+        self.cand_acc_lbl.pack(side="right")
+        
+        # Recall row
+        cand_rec_row = ctk.CTkFrame(cand_stats_frame, fg_color="transparent")
+        cand_rec_row.pack(fill="x", pady=4)
+        ctk.CTkLabel(cand_rec_row, text="Malware Recall:", font=ctk.CTkFont(size=12), text_color=MUTED).pack(side="left")
+        self.cand_rec_lbl = ctk.CTkLabel(cand_rec_row, text="—", font=ctk.CTkFont(size=18, weight="bold"), text_color=SUCCESS)
+        self.cand_rec_lbl.pack(side="right")
         
         # Deployment Outcome badge
         outcome_label_frame = ctk.CTkFrame(metrics_card, fg_color="#0a0e14", corner_radius=8, height=60)
