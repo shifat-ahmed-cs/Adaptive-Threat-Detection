@@ -876,7 +876,7 @@ class App(ctk.CTk):
             r_stats = requests.get(f"{self.server_url}/system/stats", headers=self.headers, timeout=5)
             if r_stats.status_code == 200:
                 stats = r_stats.json()
-                self.after(0, lambda: self._update_metrics_ui(stats))
+                self.after(0, lambda: self._update_metrics_ui(stats, is_completion=True))
                 
             # Highlight all steps completed successfully
             def _show_results():
@@ -890,7 +890,7 @@ class App(ctk.CTk):
             self._evolve_log(f"CRITICAL TRAINING ERROR: {e}", step_num=None)
             self.after(0, lambda: self.evolve_btn.configure(state="normal", text="RUN MODEL EVOLUTION"))
 
-    def _update_metrics_ui(self, stats):
+    def _update_metrics_ui(self, stats, is_completion=False):
         def format_percent(val):
             if val is None:
                 return "—"
@@ -899,7 +899,9 @@ class App(ctk.CTk):
             return f"{val:.2f}%"
 
         evolution_stats = stats.get("evolution_stats")
-        if evolution_stats:
+        
+        if is_completion and evolution_stats:
+            # Just completed training. Display the comparison of that specific run.
             base_acc = evolution_stats.get("base_accuracy")
             base_rec = evolution_stats.get("base_recall")
             cand_acc = evolution_stats.get("candidate_accuracy")
@@ -922,12 +924,23 @@ class App(ctk.CTk):
                     text_color=WARNING
                 )
         else:
-            # Fallback default values
-            acc = stats.get("model_accuracy", 98.25)
-            self.base_acc_lbl.configure(text="90.89%")
-            self.base_rec_lbl.configure(text="91.45%")
-            self.cand_acc_lbl.configure(text=format_percent(acc))
-            self.cand_rec_lbl.configure(text="91.45%")
+            # Idle / Startup state: Display current active model in Baseline, and clear Candidate.
+            if evolution_stats:
+                success = evolution_stats.get("evolution_successful", False)
+                if success:
+                    current_acc = evolution_stats.get("candidate_accuracy")
+                    current_rec = evolution_stats.get("candidate_recall")
+                else:
+                    current_acc = evolution_stats.get("base_accuracy")
+                    current_rec = evolution_stats.get("base_recall")
+            else:
+                current_acc = stats.get("model_accuracy", 98.25)
+                current_rec = 0.9145
+                
+            self.base_acc_lbl.configure(text=format_percent(current_acc))
+            self.base_rec_lbl.configure(text=format_percent(current_rec))
+            self.cand_acc_lbl.configure(text="—")
+            self.cand_rec_lbl.configure(text="—")
             self.evolve_outcome_lbl.configure(
                 text="MLOps Evolution Loop Idle",
                 text_color=MUTED
