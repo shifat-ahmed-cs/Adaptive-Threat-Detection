@@ -7,6 +7,7 @@ import pickle
 import shutil
 import random
 from pathlib import Path
+from sklearn.model_selection import train_test_split
 from prototype.backend.config import settings
 from models.dual_branch_model import DualBranchModel
 from utils.mutator import ThreatMutator
@@ -74,8 +75,13 @@ def run_autonomous_evolution(selected_strategy=None, epochs=5, log_callback=None
     model.load_state_dict(checkpoint['model_state_dict'])
     model.to(device)
     
-    # Use a fixed 20% validation set for comparison
-    val_indices = list(range(len(labels_base)))[-800:]
+    # Use a STRATIFIED 20% validation split (seed=42) so both classes are represented.
+    # NOTE: The dataset is class-ordered (malware first, benign last), so a naive
+    # tail-slice would contain zero malware — a stratified split fixes this.
+    all_indices = list(range(len(labels_base)))
+    _, val_indices = train_test_split(
+        all_indices, test_size=0.2, random_state=42, stratify=labels_base
+    )
     val_loader = DataLoader(TensorDataset(
         torch.FloatTensor(cnn_base[val_indices]) / 255.0, 
         torch.LongTensor(lstm_base[val_indices]), 
