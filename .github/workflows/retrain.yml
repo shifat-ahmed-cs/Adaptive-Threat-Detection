@@ -51,6 +51,10 @@ jobs:
         git add adaptive_model_final.pth
         if git diff --staged --quiet; then
           echo "No improvement found. Baseline model maintained."
+          # Still commit and push the results JSON to track the run outcome
+          git add model_evolution_results.json
+          git commit -m "MLOps: Retraining completed - Baseline maintained [skip ci]"
+          git push
         else
           git add model_evolution_results.json
           git commit -m "MLOps: Update best path model [Strategy: ${{ github.event.inputs.strategy }}, Epochs: ${{ github.event.inputs.epochs }}] [skip ci]"

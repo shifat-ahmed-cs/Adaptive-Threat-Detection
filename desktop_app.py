@@ -861,10 +861,6 @@ class App(ctk.CTk):
             def _show_results():
                 for lbl in self._flow_step_labels:
                     lbl.configure(text_color=SUCCESS)
-                self.evolve_outcome_lbl.configure(
-                    text="✔ EVOLUTION SUCCESSFUL: Server Model Updated! 🚀",
-                    text_color=SUCCESS
-                )
                 self.evolve_btn.configure(state="normal", text="RUN MODEL EVOLUTION")
                 
             self.after(0, _show_results)
@@ -887,11 +883,23 @@ class App(ctk.CTk):
             base_rec = evolution_stats.get("base_recall")
             cand_acc = evolution_stats.get("candidate_accuracy")
             cand_rec = evolution_stats.get("candidate_recall")
+            success = evolution_stats.get("evolution_successful", False)
             
             self.base_acc_lbl.configure(text=format_percent(base_acc))
             self.base_rec_lbl.configure(text=format_percent(base_rec))
             self.cand_acc_lbl.configure(text=format_percent(cand_acc))
             self.cand_rec_lbl.configure(text=format_percent(cand_rec))
+            
+            if success:
+                self.evolve_outcome_lbl.configure(
+                    text="✔ EVOLUTION SUCCESSFUL: Server Model Updated! 🚀",
+                    text_color=SUCCESS
+                )
+            else:
+                self.evolve_outcome_lbl.configure(
+                    text="ℹ BASELINE MAINTAINED: No Model Improvement",
+                    text_color=WARNING
+                )
         else:
             # Fallback default values
             acc = stats.get("model_accuracy", 98.25)
@@ -899,6 +907,10 @@ class App(ctk.CTk):
             self.base_rec_lbl.configure(text="91.45%")
             self.cand_acc_lbl.configure(text=format_percent(acc))
             self.cand_rec_lbl.configure(text="91.45%")
+            self.evolve_outcome_lbl.configure(
+                text="MLOps Evolution Loop Idle",
+                text_color=MUTED
+            )
 
     def _clear_logs(self):
         self.log_box.configure(state="normal")
