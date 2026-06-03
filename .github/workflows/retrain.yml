@@ -36,7 +36,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         # Install minimal requirements to run training on CPU
-        pip install torch numpy pandas pefile pydantic-settings
+        pip install torch numpy pandas scikit-learn matplotlib seaborn Pillow pefile pydantic-settings
 
     - name: Run Model Evolution
       run: |
