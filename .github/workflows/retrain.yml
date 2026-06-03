@@ -52,6 +52,7 @@ jobs:
         if git diff --staged --quiet; then
           echo "No improvement found. Baseline model maintained."
         else
+          git add model_evolution_results.json
           git commit -m "MLOps: Update best path model [Strategy: ${{ github.event.inputs.strategy }}, Epochs: ${{ github.event.inputs.epochs }}] [skip ci]"
           git push
           echo "Model evolution successful. Updated model committed to repository."

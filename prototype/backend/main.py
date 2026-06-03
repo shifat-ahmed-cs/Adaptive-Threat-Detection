@@ -134,12 +134,35 @@ async def get_history(limit: int = 10, db: Session = Depends(get_db), current_us
 @app.get("/system/stats")
 async def get_stats(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     metric = db.query(SystemMetric).first()
+    
+    # Read evolution results if available
+    evolution_stats = None
+    results_path = project_root / "model_evolution_results.json"
+    if results_path.exists():
+        try:
+            import json
+            with open(results_path, "r") as f:
+                evolution_stats = json.load(f)
+        except Exception as e:
+            logger.error(f"Error reading evolution results: {e}")
+            
+    model_accuracy = metric.model_accuracy
+    if evolution_stats and evolution_stats.get("evolution_successful"):
+        cand_acc = evolution_stats.get("candidate_accuracy", 0.9825)
+        model_accuracy = cand_acc * 100 if cand_acc <= 1.0 else cand_acc
+        
+        # Persist to DB
+        if metric.model_accuracy != model_accuracy:
+            metric.model_accuracy = model_accuracy
+            db.commit()
+            
     return {
         "total_scans": metric.total_scans,
         "threats_blocked": metric.threats_blocked,
-        "model_accuracy": metric.model_accuracy,
+        "model_accuracy": model_accuracy,
         "last_evolution": metric.last_evolution,
-        "system_health": "Optimal"
+        "system_health": "Optimal",
+        "evolution_stats": evolution_stats
     }
 
 @app.post("/scans/{scan_id}/feedback")
@@ -230,6 +253,18 @@ async def sync_model(current_user: dict = Depends(get_current_user)):
                 for chunk in resp.iter_content(chunk_size=8192):
                     f.write(chunk)
             
+            # Also download model_evolution_results.json if it exists on GitHub
+            json_url = f"https://raw.githubusercontent.com/{settings.GITHUB_REPO}/main/model_evolution_results.json"
+            try:
+                logger.info(f"Syncing model evolution stats from: {json_url}")
+                json_resp = requests.get(json_url, headers=headers)
+                if json_resp.status_code == 200:
+                    with open(project_root / "model_evolution_results.json", "w") as f:
+                        f.write(json_resp.text)
+                    logger.info("Sync: model_evolution_results.json updated.")
+            except Exception as json_err:
+                logger.warning(f"Failed to sync evolution results JSON: {json_err}")
+                
             # Reload scanner
             from .scanner import scanner
             scanner.reload_model()

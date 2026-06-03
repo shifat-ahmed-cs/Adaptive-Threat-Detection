@@ -154,6 +154,24 @@ def run_autonomous_evolution(selected_strategy=None, epochs=5, log_callback=None
         log("  [NO] Evolution Stagnated. Discarding candidate.")
         log("[SUCCESS] Section 6 Cycle Complete: Baseline Maintained.")
         
+    # Write stats to JSON for backend / client UI consumption
+    import json
+    results = {
+        "base_accuracy": float(base_acc),
+        "base_recall": float(base_rec),
+        "candidate_accuracy": float(cand_acc),
+        "candidate_recall": float(cand_rec),
+        "evolution_successful": bool(is_better),
+        "strategy": selected_strategy or "random_mixed",
+        "epochs": epochs
+    }
+    try:
+        with open("model_evolution_results.json", "w") as f:
+            json.dump(results, f, indent=2)
+        log("  [OK] Saved evolution results to model_evolution_results.json")
+    except Exception as e:
+        log(f"  [ERROR] Failed to save evolution results: {e}", error=True)
+        
     return is_better, (base_acc, base_rec), (cand_acc, cand_rec)
 
 if __name__ == "__main__":
