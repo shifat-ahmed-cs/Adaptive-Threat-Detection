@@ -18,6 +18,10 @@ on:
         default: '3'
         type: string
 
+# Explicitly grant write access to push model updates back to the repository
+permissions:
+  contents: write
+
 jobs:
   retrain:
     runs-on: ubuntu-latest
@@ -25,6 +29,8 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0   # Full history needed for rebase on push
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -46,18 +52,36 @@ jobs:
       run: |
         git config --global user.name "GitHub Action (Model Evolution)"
         git config --global user.email "actions@github.com"
-        
-        # Check if the model file was changed/updated
+
+        # Fetch latest remote commits to avoid push rejection due to diverged history
+        git fetch origin main
+        git rebase origin/main || git rebase --abort
+
+        # Stage model file (may or may not have changed)
         git add adaptive_model_final.pth
+
+        # Stage results JSON (always written by continuous_learning.py)
+        if [ -f model_evolution_results.json ]; then
+          git add model_evolution_results.json
+        fi
+
+        # Check if there is anything to commit
         if git diff --staged --quiet; then
-          echo "No improvement found. Baseline model maintained."
-          # Still commit and push the results JSON to track the run outcome
-          git add model_evolution_results.json
-          git commit -m "MLOps: Retraining completed - Baseline maintained [skip ci]"
-          git push
+          echo "No files changed. Nothing to commit."
         else
-          git add model_evolution_results.json
-          git commit -m "MLOps: Update best path model [Strategy: ${{ github.event.inputs.strategy }}, Epochs: ${{ github.event.inputs.epochs }}] [skip ci]"
-          git push
-          echo "Model evolution successful. Updated model committed to repository."
+          MODEL_CHANGED=false
+          if ! git diff --staged --quiet -- adaptive_model_final.pth; then
+            MODEL_CHANGED=true
+          fi
+
+          if [ "$MODEL_CHANGED" = "true" ]; then
+            git commit -m "MLOps: Update best path model [Strategy: ${{ github.event.inputs.strategy }}, Epochs: ${{ github.event.inputs.epochs }}] [skip ci]"
+            echo "Model evolution successful. Updated model committed to repository."
+          else
+            git commit -m "MLOps: Retraining completed - Baseline maintained [skip ci]"
+            echo "No model improvement. Baseline maintained. Results JSON committed."
+          fi
+
+          # Push with retry in case of transient failures
+          git push origin HEAD:main || (git pull --rebase origin main && git push origin HEAD:main)
         fi
