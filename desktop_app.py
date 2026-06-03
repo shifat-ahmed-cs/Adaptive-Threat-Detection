@@ -811,84 +811,165 @@ class App(ctk.CTk):
     def _run_evolution_bg(self, strategy, epochs):
         import requests
         import time
+        from datetime import datetime, timezone
+
+        # ── GitHub step name → (flow_step_num, friendly_label) ──────────────
+        # Maps each GitHub Actions step name to the corresponding flow label index.
+        STEP_MAP = {
+            "Checkout Repository":          (1, "Loading repository & dataset..."),
+            "Set up Python":                (1, "Setting up Python environment..."),
+            "Install Dependencies":         (1, "Installing dependencies (torch, sklearn)..."),
+            "Run Model Evolution":          (3, "Training candidate model on adversarial data..."),
+            "Commit and Push Updated Model":(6, "Committing & pushing results to GitHub..."),
+        }
+
+        def elapsed_str(since_iso):
+            """Return MM:SS elapsed since an ISO timestamp string."""
+            if not since_iso:
+                return ""
+            try:
+                start = datetime.fromisoformat(since_iso.replace("Z", "+00:00"))
+                secs  = int((datetime.now(timezone.utc) - start).total_seconds())
+                return f"  [{secs // 60:02d}:{secs % 60:02d} elapsed]"
+            except Exception:
+                return ""
+
         self._evolve_log("Initializing Section 6 Model Evolution Loop...", step_num=1)
-        
+
         try:
             self._evolve_log("Sending trigger request to FastAPI server...", step_num=1)
-            # Call FastAPI retrain API
             r = requests.post(
-                f"{self.server_url}/system/retrain?strategy={strategy}&epochs={epochs}", 
-                headers=self.headers, 
-                timeout=600 # 10 minutes timeout for local training
+                f"{self.server_url}/system/retrain?strategy={strategy}&epochs={epochs}",
+                headers=self.headers,
+                timeout=600
             )
-            
             if r.status_code != 200:
                 raise Exception(f"Server error {r.status_code}: {r.text[:200]}")
-                
-            resp = r.json()
+
+            resp   = r.json()
             status = resp.get("status")
-            
+
             if status == "github_triggered":
                 repo = resp.get("repo")
-                self._evolve_log(f"GitHub Actions retraining triggered for: {repo}", step_num=2)
-                self._evolve_log("GitHub Action runner is starting...", step_num=3)
-                
-                # Poll status
-                last_github_status = None
+                self._evolve_log(f"GitHub Actions triggered for: {repo}", step_num=2)
+                self._evolve_log("Waiting for runner to start...", step_num=2)
+
+                last_step_name   = None
+                train_started_at = None   # timestamp when "Run Model Evolution" began
+                poll_count       = 0
+
                 while True:
                     time.sleep(5)
-                    r_status = requests.get(f"{self.server_url}/system/retrain-status", headers=self.headers, timeout=5)
-                    if r_status.status_code != 200:
-                        self._evolve_log(f"Warning: Failed to fetch status: {r_status.text[:100]}", step_num=3)
+                    poll_count += 1
+
+                    try:
+                        r_status = requests.get(
+                            f"{self.server_url}/system/retrain-status",
+                            headers=self.headers, timeout=10
+                        )
+                    except Exception as net_err:
+                        self._evolve_log(f"  [poll] Network error: {net_err}", step_num=None)
                         continue
-                        
-                    run_info = r_status.json()
+
+                    if r_status.status_code != 200:
+                        continue
+
+                    run_info   = r_status.json()
                     run_status = run_info.get("status")
                     conclusion = run_info.get("conclusion")
-                    
-                    if run_status != last_github_status:
-                        self._evolve_log(f"GitHub Run Status: {run_status}...", step_num=3)
-                        last_github_status = run_status
-                        
+                    steps      = run_info.get("steps", [])
+
+                    # ── Map current active GitHub step → flow indicator ───────
+                    active_step = next(
+                        (s for s in steps if s.get("status") == "in_progress"), None
+                    )
+                    if active_step:
+                        gh_name = active_step.get("name", "")
+                        flow_num, friendly = STEP_MAP.get(gh_name, (2, gh_name))
+
+                        # Track when actual training started
+                        if gh_name == "Run Model Evolution":
+                            if train_started_at is None:
+                                train_started_at = active_step.get("started_at")
+                                self._evolve_log(
+                                    f"[Step 3/6] Mutating data & training candidate model...",
+                                    step_num=2
+                                )
+                            # Show live timer every poll while training is running
+                            timer = elapsed_str(train_started_at)
+                            self._evolve_log(
+                                f"  Training in progress{timer} — {epochs} epoch(s) on augmented dataset",
+                                step_num=3
+                            )
+                        elif gh_name != last_step_name:
+                            self._evolve_log(f"[GitHub] {friendly}", step_num=flow_num)
+
+                        last_step_name = gh_name
+
+                    elif run_status == "queued":
+                        if poll_count % 3 == 0:   # log every 15s while queued
+                            self._evolve_log("  Runner queued — waiting for a free GitHub worker...", step_num=1)
+
+                    # ── Check for completion ──────────────────────────────────
                     if run_status == "completed":
                         if conclusion == "success":
-                            self._evolve_log("GitHub Action finished successfully! Model committed to GitHub.", step_num=4)
-                            self._evolve_log("Downloading and syncing updated model to FastAPI server...", step_num=5)
-                            
-                            # Sync model
-                            r_sync = requests.post(f"{self.server_url}/system/sync-model", headers=self.headers, timeout=60)
+                            # Check whether the model was actually updated
+                            improved = any(
+                                s.get("name") == "Commit and Push Updated Model"
+                                and s.get("conclusion") == "success"
+                                for s in steps
+                            )
+                            self._evolve_log(
+                                "GitHub Action finished! Evaluating results...", step_num=4
+                            )
+                            self._evolve_log(
+                                "Comparison complete. Syncing results to local server...", step_num=5
+                            )
+
+                            # Sync model + results JSON from GitHub
+                            r_sync = requests.post(
+                                f"{self.server_url}/system/sync-model",
+                                headers=self.headers, timeout=60
+                            )
                             if r_sync.status_code == 200:
-                                self._evolve_log("Model successfully synced and reloaded on the server! 🚀", step_num=6)
+                                self._evolve_log(
+                                    "Model weights & metrics synced from GitHub. Server reloaded! ",
+                                    step_num=6
+                                )
                                 break
                             else:
                                 raise Exception(f"Model sync failed: {r_sync.text[:200]}")
                         else:
                             raise Exception(f"GitHub Action completed with conclusion: {conclusion}")
-            
+
             elif status == "success":
                 self._evolve_log("Local retraining completed successfully!", step_num=5)
-                self._evolve_log("Model successfully reloaded on the server! 🚀", step_num=6)
-            
+                self._evolve_log("Model successfully reloaded on the server! ", step_num=6)
+
             else:
                 raise Exception(f"Retrain failed: {resp.get('message')}")
-                
+
             # Fetch updated metrics to show in GUI
-            r_stats = requests.get(f"{self.server_url}/system/stats", headers=self.headers, timeout=5)
+            r_stats = requests.get(
+                f"{self.server_url}/system/stats", headers=self.headers, timeout=5
+            )
             if r_stats.status_code == 200:
                 stats = r_stats.json()
                 self.after(0, lambda: self._update_metrics_ui(stats, is_completion=True))
-                
-            # Highlight all steps completed successfully
+
+            # Mark all flow steps complete
             def _show_results():
                 for lbl in self._flow_step_labels:
                     lbl.configure(text_color=SUCCESS)
                 self.evolve_btn.configure(state="normal", text="RUN MODEL EVOLUTION")
-                
+
             self.after(0, _show_results)
-            
+
         except Exception as e:
             self._evolve_log(f"CRITICAL TRAINING ERROR: {e}", step_num=None)
             self.after(0, lambda: self.evolve_btn.configure(state="normal", text="RUN MODEL EVOLUTION"))
+
+
 
     def _update_metrics_ui(self, stats, is_completion=False):
         def format_percent(val):

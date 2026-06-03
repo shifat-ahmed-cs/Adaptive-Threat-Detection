@@ -279,36 +279,74 @@ async def sync_model(current_user: dict = Depends(get_current_user)):
 
 @app.get("/system/retrain-status")
 async def get_retrain_status(current_user: dict = Depends(get_current_user)):
-    """Checks the status of the latest Model Retraining GitHub Action workflow run."""
+    """Checks the status of the latest Model Retraining GitHub Action workflow run,
+    including per-step progress information for the desktop app progress indicator."""
     if not settings.GITHUB_REPO or not settings.GITHUB_TOKEN:
         return {"status": "local_only", "message": "GitHub Integration not configured."}
         
     import requests
-    url = f"https://api.github.com/repos/{settings.GITHUB_REPO}/actions/runs"
-    headers = {
+    gh_headers = {
         "Authorization": f"Bearer {settings.GITHUB_TOKEN}",
         "Accept": "application/vnd.github+json"
     }
     try:
-        resp = requests.get(url, headers=headers)
-        if resp.status_code == 200:
-            runs = resp.json().get("workflow_runs", [])
-            # Find the latest Model Retraining workflow run
-            retrain_runs = [r for r in runs if "retrain.yml" in r.get("path", "")]
-            if not retrain_runs:
-                return {"status": "idle", "message": "No retraining runs found."}
-                
-            latest_run = retrain_runs[0]
-            return {
-                "status": latest_run.get("status"), # e.g. "queued", "in_progress", "completed"
-                "conclusion": latest_run.get("conclusion"), # e.g. "success", "failure", "cancelled"
-                "html_url": latest_run.get("html_url"),
-                "run_id": latest_run.get("id")
-            }
-        else:
-            return {"status": "error", "message": f"GitHub API failed: {resp.text[:200]}"}
+        # 1. Get the latest retrain run
+        runs_resp = requests.get(
+            f"https://api.github.com/repos/{settings.GITHUB_REPO}/actions/runs",
+            headers=gh_headers, timeout=10
+        )
+        if runs_resp.status_code != 200:
+            return {"status": "error", "message": f"GitHub API failed: {runs_resp.text[:200]}"}
+
+        runs = runs_resp.json().get("workflow_runs", [])
+        retrain_runs = [r for r in runs if "retrain.yml" in r.get("path", "")]
+        if not retrain_runs:
+            return {"status": "idle", "message": "No retraining runs found."}
+
+        latest_run = retrain_runs[0]
+        run_id     = latest_run.get("id")
+        run_status = latest_run.get("status")     # queued / in_progress / completed
+
+        # 2. Fetch job steps for granular progress (only worth fetching if not completed)
+        steps = []
+        run_started_at = latest_run.get("run_started_at")  # ISO timestamp
+        try:
+            jobs_resp = requests.get(
+                f"https://api.github.com/repos/{settings.GITHUB_REPO}/actions/runs/{run_id}/jobs",
+                headers=gh_headers, timeout=10
+            )
+            if jobs_resp.status_code == 200:
+                jobs = jobs_resp.json().get("jobs", [])
+                if jobs:
+                    # Flatten only the user-defined steps (skip internal GH steps)
+                    raw_steps = jobs[0].get("steps", [])
+                    steps = [
+                        {
+                            "name":       s.get("name"),
+                            "status":     s.get("status"),      # queued/in_progress/completed
+                            "conclusion": s.get("conclusion"),  # success/failure/None
+                            "started_at": s.get("started_at"),
+                        }
+                        for s in raw_steps
+                        # Skip GitHub's internal bookkeeping steps
+                        if s.get("name") not in ("Set up job", "Complete job",
+                                                  "Post Set up Python", "Post Checkout Repository")
+                    ]
+        except Exception as step_err:
+            logger.warning(f"Could not fetch job steps: {step_err}")
+
+        return {
+            "status":         run_status,
+            "conclusion":     latest_run.get("conclusion"),
+            "html_url":       latest_run.get("html_url"),
+            "run_id":         run_id,
+            "run_started_at": run_started_at,
+            "steps":          steps,   # list of {name, status, conclusion, started_at}
+        }
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+
 
 # Git Integration Endpoints
 @app.get("/git/status", dependencies=[Depends(get_current_user)])
