@@ -1,0 +1,26 @@
+{
+  "Overall Performance": {
+    "Accuracy": "97.81%",
+    "Precision": "97.81%",
+    "Recall": "100.00%",
+    "F1-Score": "98.89%",
+    "AUC": "71.82%"
+  },
+  "Malware Detection": {
+    "Precision": "97.81%",
+    "Recall": "100.00%"
+  },
+  "Adversarial Robustness": {
+    "0% Mutation": "100.00%",
+    "5% Mutation": "100.00%",
+    "10% Mutation": "100.00%",
+    "20% Mutation": "100.00%",
+    "30% Mutation": "100.00%",
+    "50% Mutation": "100.00%"
+  },
+  "Dataset Info": {
+    "Total Samples": 6496,
+    "Benign Samples": 142,
+    "Malware Samples": 6354
+  }
+}

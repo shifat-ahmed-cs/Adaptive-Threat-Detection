@@ -1,0 +1,15 @@
+[21] A. Oliveira and R. J. Sassi, "Behavioral malware detection using deep graph 
+convolutional neural networks," TechRxiv Preprint, 2019. doi: 10.36227/
+techrxiv.10043090. [Online]. Available: https://doi.org/10.36227/techrxiv.
+10043090.
+
+[22] F. O. Catak, A. F. Yazi, O. Elezaj, and J. Ahmed, "Deep learning based 
+sequential model for malware analysis using windows exe api calls," PeerJ 
+Computer Science, vol. 6, e285, 2020. doi: 10.7717/peerj-cs.285. [Online]. 
+Available: https://doi.org/10.7717/peerj-cs.285.
+
+[23] M. Kalash, M. Rochan, N. Mohammed, N. D. B. Bruce, Y. Wang, and F. Iqbal, 
+"Malware classification with deep convolutional neural networks," in 2018 
+9th IFIP International Conference on New Technologies, Mobility and Security 
+(NTMS), 2018, pp. 1–5. doi: 10.1109/NTMS.2018.8328749. [Online]. Available: 
+https://doi.org/10.1109/NTMS.2018.8328749.

@@ -1,0 +1,99 @@
+It’s already been two decades since we stepped into the 21st century.  If we look at computing infrastructure via virtualized platforms, cloud computing has been providing on-demand and elastic access to it. For the contemporary digital landscape, it has become an essential component. Opportunity to accelerate development, reduce costs, and improve productivity in cloud computing has been given to the enterprises. Cloud computing has become the backbone of modern digital operations. Building, testing, and releasing software is now being automated by continuous integration and continuous deployment. This automation has become the key part in the rapid development and deployment of software. Consistent performance, faster delivery, and collaboration are being ensured after the integration with cloud platforms. Compromised dependencies, malicious code injections, and tampered build images are now part of common threats. The dynamic and interconnected nature of cloud CI/CD pipelines makes them vulnerable to cyberattacks. Financial losses, data breaches, and service disruption can be caused by these attacks.\\
+
+Current threat detection systems are often limited by relying on static analysis, which only identifies known threats by searching for predefined malicious signatures or patterns in code. As a static system needs frequent manual updates, it causes poor adaptability, delays, and false positives. Static analysis is mainly effective for known attacks, but it fails against metamorphic or polymorphic malware that constantly changes to avoid detection. The research proposes a dynamic, adaptive threat detection framework tailored for cloud CI/CD environments. It uses evolving neural architectures that can learn and restructure themselves in real time as new threats appear. Our system proposes to operate within the CI/CD pipeline (not after deployment) for continuous monitoring and instant threat response.. The system combines static analysis, behavioral analysis, and a self-learning module to generate and examine mutated malware samples. It can more accurately distinguish real threats from benign code variations. So our proposed system will enhance the resilience and adaptability of CI/CD pipelines. It will represent a major advancement toward proactive, intelligent cybersecurity in cloud-based development environments.
+
+
+\section{Background}
+A single line of code emanates from a developer's laptop on the day it goes out and hurtles down cloud pipelines with unheard-of velocity. And as it goes along its way, it spins up services that didn't exist before and packages them on-the-fly into systems so complex they will be gone hours after. Yet while this nimbleness is characteristic of modern software delivery, that same swiftness also makes it difficult to distinguish the routine from the emergent risk: a version bump might hide a compromised dependency; an image may appear identical but with differences, or maybe a particular step works in one way today and another tomorrow. We must be automating all the things and killing alert noise with hammers so providers are deaf for weekly peaks while we miss once-a-month outbound requests. When security checks are initiated, they would halt the forward progress, either causing a delay in releases or getting permissive-based trust erosion to happen system-wide.\\
+
+This research tackles this tension: pipelines change continuously, whereas defenses update infrequently. This is not another static control point. What we need is an adaptable framework to treat the pipeline as a dynamic organism, one capable of learning how “normal” moves across time and discerning live drift from stale change. The aim is to protect the delivery speed while at the same time maintaining resiliency, forming a defense that merges with day-to-day workflows, observing behavioral patterns across codes, and raising its level of understanding in every build iteration.
+
+
+\section{Rational of the Study or Motivation}
+Cloud CI/CD systems update software very quickly, but traditional security tools can’t keep up. Old methods rely on fixed signatures or run scans only after deployment, so they often miss new or changing (polymorphic) malware, raise too many false alarms, and slow down releases.\\
+
+This research builds a self-learning neural detector directly into the CI/CD pipeline. It combines both static and behavior-based analysis and keeps improving itself through a safe threat-mutation training loop. This makes detection faster, smarter, and more adaptable in real time.\\
+
+The main goal is to make security learn and adapt as fast as the pipeline changes - and to prove that this approach performs better than traditional SAST/DAST tools in accuracy, adaptability, and efficiency.\\
+
+
+\textbf{Industry view}: As software delivery becomes faster and more automated, security must become part of the process, not a separate checkpoint. This work builds a smart, built-in security gate that protects the system without slowing it down.\\
+
+\textbf{Practical view}: Old security tools are slow and rigid. My approach uses a self-updating neural model and safe threat simulations to catch new types of attacks, reduce false positives, and keep the release process smooth.\\
+
+
+
+\section{Problem Statement}
+Static detection is inefficient in cloud CI/CD pipelines because they are scalable and dynamic. Current fixed systems lack embedded self-adaptive learning, which results in delays, errors, and vulnerability to new attacks. This is necessary for real-time analysis of constantly changing polymorphic threats.\\
+
+\vspace{2mm}
+
+\section{Objectives}
+Below are the specific objectives that guide this research. They focus on designing an adaptive defense that learns in real time while fitting seamlessly into modern cloud CI/CD workflows.\\
+\begin{enumerate}
+    \item \textbf{Design an architecture for a self-adaptive neural network}:
+     We want to create a neural network model that dynamically modifies its variables and structure to real-time changes in malware behavior.
+     \item \textbf{Integrate Threat Mutation for Adversarial Learning}:
+     We want to implement an automated malware mutation module that creates a customized adversarial system so that it can effectively identify evolving threats.
+     \item \textbf{Enhance Pipeline Security through Continuous Self-Evolution}:
+     There can be both mutated threats and regular operational behavior, so we will allow for continuous learning from both these threats to provide strong security against the newly identified polymorphic and metamorphic malware.
+     \item \textbf{Establish CI/CD Pipelines with Real-Time Monitoring}:
+     At the industry level, embed the adaptive detection system directly into the CI/CD pipeline so that it can perform in real time without any delay in deployment.
+     \item \textbf{Evaluate and Benchmark the Adaptive Detection Framework}:
+     Assess system performance using real-world datasets and benchmark it against existing static detection approaches (SAST/DAST) to validate improvements in adaptability, precision, and efficiency.
+\end{enumerate}
+
+\section{Methodology}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{images/diagram.png}
+    \caption{Research Overview}
+    \label{fig: Research Overview}
+\end{figure}
+Our proposed system kicks into action automatically whenever a developer makes a code commit on a staged build. It runs a series of security checks including static code analysis, container scans, and dynamic tests to spot potential issues early. The findings from these scans are then turned into useful data that feeds into a smart neural network designed to spot threats.\\
+
+What makes this system special is that it keeps learning and getting better over time. It saves real examples of threats and even creates slightly altered versions to challenge itself, using these to continuously train and improve its detection skills.\\
+
+Every code change is carefully reviewed by this detector. If it’s safe, the change moves forward smoothly into production. But if something looks suspicious or risky, the system jumps into actions like, isolating problematic files, stopping ongoing jobs, rotating credentials, and rolling back changes to protect the system.\\
+
+All of these steps, the scan results, detection decisions, protective actions, and ongoing training data are fed into a continuous learning process. This means the system is always evolving, getting smarter, and helping ensure that every software release is as secure and reliable as possible.
+
+
+\section{Scope and Limitations}
+\subsection{Scope of the Research}
+This study builds and tests a smart, self-learning malware detection system for cloud-based software development pipelines (CI/CD). Here’s a simpler breakdown:
+\begin{enumerate}
+    \item It uses a neural network that can adapt itself in real time to spot new, unseen (zero-day) threats.
+    \item The system runs continuously within CI/CD pipelines, helping developers catch malware early in the development process.
+    \item Its defenses are improved using techniques like adversarial training and Red Team simulations, especially focusing on malware that keeps changing (polymorphic and metamorphic).
+    \item The research measures how well it performs in terms of accuracy, false positives, speed (latency), and adaptability, comparing it with traditional tools like SAST and DAST.
+    \item It does not focus on areas like building full enterprise products, legal or compliance issues, low-level network security, or human factors — the main emphasis is on technical design and testing.
+\end{enumerate}
+
+\subsection{Research Challenges}
+CI/CD environments change very quickly, with things like auto-scaling, containers, and lots of small microservices. Because of this constant movement, it’s hard to gather and analyze data in a consistent way. Rapidly evolving malware risks model overfitting and catastrophic forgetting, so architectures must adapt while remaining stable. Labeled threat data are scarce, often requiring synthetic or red-team datasets that must mirror real-world threats. Increasing sensitivity to catch novel attacks can raise false positives and disrupt deployments. Deep-learning integration must preserve throughput by minimizing latency and resource use. The detector itself can be attacked, so adversarial robustness and model integrity are essential. Real-time processing of large artifact streams demands computational efficiency and scalable infrastructure.
+
+
+% \section{Expected Outcomes}
+% Discuss what results you want to achieve or the target outcomes.
+
+
+% \section{Thesis Organization}
+% Explain the organization of the report and briefly discuss what is discussed in each subsequent chapter.
+
+
+% \section{Team Overview}
+% \textbf{[In case of internship]}
+
+
+% Write about your group and your role in that team.
+
+
+% \section{Key Learnings and Insights}
+% \textbf{[In case of internship]}
+
+
+% This section can be used to introduce the team members involv...each member contributed to the overall success of the project.
+
+
+

@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# PyTorch
+*.pth
+*.pt
+checkpoints/*.pth
+checkpoints/*.pt
+!checkpoints/.gitkeep
+
+# Data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.csv
+*.npy
+*.npz
+*.h5
+*.hdf5
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Results
+results/
+outputs/
+*.png
+*.jpg
+*.jpeg
+!docs/*.png
+
+# Model artifacts
+*.onnx
+*.pb
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Unignore files required for MLOps retraining in GitHub Actions
+!adaptive_model_final.pth
+!data/custom_dataset/*.npy
+!data/custom_dataset/*.pkl
+
+# Ignore server launcher containing token
+run_server.bat

@@ -1,0 +1,58 @@
+name: Model Retraining Loop
+
+on:
+  workflow_dispatch:
+    inputs:
+      strategy:
+        description: 'Mutation Strategy'
+        required: true
+        default: 'random_insert'
+        type: choice
+        options:
+          - random_insert
+          - random_replace
+          - noise_append
+      epochs:
+        description: 'Number of training epochs'
+        required: true
+        default: '3'
+        type: string
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Install minimal requirements to run training on CPU
+        pip install torch numpy pefile pydantic-settings
+
+    - name: Run Model Evolution
+      run: |
+        python continuous_learning.py --strategy ${{ github.event.inputs.strategy }} --epochs ${{ github.event.inputs.epochs }}
+
+    - name: Commit and Push Updated Model
+      run: |
+        git config --global user.name "GitHub Action (Model Evolution)"
+        git config --global user.email "actions@github.com"
+        
+        # Check if the model file was changed/updated
+        git add adaptive_model_final.pth
+        if git diff --staged --quiet; then
+          echo "No improvement found. Baseline model maintained."
+        else
+          git commit -m "MLOps: Update best path model [Strategy: ${{ github.event.inputs.strategy }}, Epochs: ${{ github.event.inputs.epochs }}] [skip ci]"
+          git push
+          echo "Model evolution successful. Updated model committed to repository."
+        fi

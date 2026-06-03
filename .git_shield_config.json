@@ -1,0 +1,5 @@
+{
+  "quarantine": true,
+  "self_heal": false,
+  "lockout": false
+}

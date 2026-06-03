@@ -1,0 +1,1090 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global/global}
+    \entry{Tsukamoto}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=5340742365926c8f9617c86420bab2ac}{%
+           family={Tsukamoto},
+           familyi={T\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=df6bbe5510fc510a40b4643681f175ef}{%
+           family={Namatame},
+           familyi={N\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{43838c1f12cf3fc2c57402982d23e80e}
+      \strng{fullhash}{43838c1f12cf3fc2c57402982d23e80e}
+      \strng{fullhashraw}{43838c1f12cf3fc2c57402982d23e80e}
+      \strng{bibnamehash}{43838c1f12cf3fc2c57402982d23e80e}
+      \strng{authorbibnamehash}{43838c1f12cf3fc2c57402982d23e80e}
+      \strng{authornamehash}{43838c1f12cf3fc2c57402982d23e80e}
+      \strng{authorfullhash}{43838c1f12cf3fc2c57402982d23e80e}
+      \strng{authorfullhashraw}{43838c1f12cf3fc2c57402982d23e80e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of IEEE International Conference on Evolutionary Computation}
+      \field{title}{Evolving neural network models}
+      \field{year}{1996}
+      \field{pages}{689\bibrangedash 693}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/ICEC.1996.542685
+      \endverb
+      \keyw{Neural networks;Adaptive systems;Evolution (biology);Learning systems;Biological systems;Neurons;Computer science;Large-scale systems;Marine vehicles;Buildings}
+    \endentry
+    \entry{Harvey}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=44745dc5fe74436124da410b2ad15fb9}{%
+           family={Harvey},
+           familyi={H\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=2fe52273f0122406736564962fec9247}{%
+           family={Husb},
+           familyi={H\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ff7e463a450513a7381425c89f011324}{%
+           family={Cliff},
+           familyi={C\bibinitperiod},
+           given={Dave},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{ebfddb9dc246d66615d5a39f967a6e7f}
+      \strng{fullhash}{db3b90c4e8730c4e43ffeb9884f4cf04}
+      \strng{fullhashraw}{db3b90c4e8730c4e43ffeb9884f4cf04}
+      \strng{bibnamehash}{db3b90c4e8730c4e43ffeb9884f4cf04}
+      \strng{authorbibnamehash}{db3b90c4e8730c4e43ffeb9884f4cf04}
+      \strng{authornamehash}{ebfddb9dc246d66615d5a39f967a6e7f}
+      \strng{authorfullhash}{db3b90c4e8730c4e43ffeb9884f4cf04}
+      \strng{authorfullhashraw}{db3b90c4e8730c4e43ffeb9884f4cf04}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{08}
+      \field{title}{Incremental Evolution of Neural Network Architectures for Adaptive Behaviour}
+      \field{year}{1997}
+    \endentry
+    \entry{Christodorescu}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=3d285efd2cbdc38f6ec05d4087ca26a1}{%
+           family={Christodorescu},
+           familyi={C\bibinitperiod},
+           given={Mihai},
+           giveni={M\bibinitperiod}}}%
+        {{hash=79009195865285f3a51dae182c57715d}{%
+           family={Seshia},
+           familyi={S\bibinitperiod},
+           given={Sanjit},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d458d5f9b64652055bd81d57e4777b22}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Dawn},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a11ebfde36f6bd74f87e0ec6932834ea}{%
+           family={Bryant},
+           familyi={B\bibinitperiod},
+           given={Randal},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{7fc0c4187becffbabe9ba7f0f7c139f0}
+      \strng{fullhash}{7726b2f8b604dd696d36d4006e291d96}
+      \strng{fullhashraw}{7726b2f8b604dd696d36d4006e291d96}
+      \strng{bibnamehash}{7726b2f8b604dd696d36d4006e291d96}
+      \strng{authorbibnamehash}{7726b2f8b604dd696d36d4006e291d96}
+      \strng{authornamehash}{7fc0c4187becffbabe9ba7f0f7c139f0}
+      \strng{authorfullhash}{7726b2f8b604dd696d36d4006e291d96}
+      \strng{authorfullhashraw}{7726b2f8b604dd696d36d4006e291d96}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-7695-2339-0}
+      \field{journaltitle}{Proceedings - IEEE Symposium on Security and Privacy}
+      \field{month}{06}
+      \field{title}{Semantics-Aware Malware Detection}
+      \field{year}{2005}
+      \field{pages}{32\bibrangedash 46}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/SP.2005.20
+      \endverb
+    \endentry
+    \entry{Mirkovic}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=03b7274a86dbf5ea13d3abde794916cb}{%
+           family={Mirkovic},
+           familyi={M\bibinitperiod},
+           given={Jelena},
+           giveni={J\bibinitperiod}}}%
+        {{hash=25f473290c8bb7bab58c095d52a08e35}{%
+           family={Reiher},
+           familyi={R\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d939ff2a6868e0d14341dfdfaf77beb6}{%
+           family={Papadopoulos},
+           familyi={P\bibinitperiod},
+           given={Christos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=08e6e6e68422537fffa305afaa59da0c}{%
+           family={Hussain},
+           familyi={H\bibinitperiod},
+           given={Alefiya},
+           giveni={A\bibinitperiod}}}%
+        {{hash=926c1bebb83c1bb7ea5b9e08e49b9067}{%
+           family={Shepard},
+           familyi={S\bibinitperiod},
+           given={Marla},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1ebb2d952b2c4901dd1c52ea05399cbe}{%
+           family={Berg},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8d7967c3b80e53af722bc5a68d38355b}{%
+           family={Jung},
+           familyi={J\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {USA}%
+      }
+      \list{publisher}{1}{%
+        {IEEE Computer Society}%
+      }
+      \strng{namehash}{c0ca77e9a02be3f2a2f58068728f674f}
+      \strng{fullhash}{0d29a2bf3880b2410813e0a197ca0874}
+      \strng{fullhashraw}{0d29a2bf3880b2410813e0a197ca0874}
+      \strng{bibnamehash}{c0ca77e9a02be3f2a2f58068728f674f}
+      \strng{authorbibnamehash}{c0ca77e9a02be3f2a2f58068728f674f}
+      \strng{authornamehash}{c0ca77e9a02be3f2a2f58068728f674f}
+      \strng{authorfullhash}{0d29a2bf3880b2410813e0a197ca0874}
+      \strng{authorfullhashraw}{0d29a2bf3880b2410813e0a197ca0874}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Testing security systems is challenging because a system's authors have to play the double role of attackers and defenders. Red Team/Blue Team exercises are an invaluable mechanism for security testing. They partition researchers into two competing teams of attackers and defenders, enabling them to create challenging and realistic test scenarios. While such exercises provide valuable insight into vulnerabilities of security systems, they are very expensive and thus rarely performed. In this paper we describe a Red Team/Blue Team exercise, sponsored by DARPA's FTN program, and performed October 2002 --- May 2003. The goal of the exercise was to evaluate a collaborative DDoS defense, comprised of a distributed system, COSSACK, and a stand-alone defense, D-WARD. The role of the Blue Team was played by developers of the tested systems from USC/ISI and UCLA, the Red Team included researchers from Sandia National Laboratory, and all the coordination, experiment execution, result collection and analysis was performed by the White Team from BBN Technologies. This exercise was of immense value to all involved --- it uncovered significant vulnerabilities in tested systems, pointed out desirable characteristics in DDoS defense systems (e.g., avoiding reliance on timing mechanisms), and taught us many lessons about testing of DDoS defenses.}
+      \field{issn}{0018-9340}
+      \field{journaltitle}{IEEE Trans. Comput.}
+      \field{month}{8}
+      \field{number}{8}
+      \field{title}{Testing a Collaborative DDoS Defense In a Red Team/Blue Team Exercise}
+      \field{volume}{57}
+      \field{year}{2008}
+      \field{pages}{1098\bibrangedash 1112}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/TC.2008.42
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1109/TC.2008.42
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1109/TC.2008.42
+      \endverb
+      \keyw{and Licensing,Testing,Network-level security and protection,Certification}
+    \endentry
+    \entry{Miikkulainen}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=70ad9af6f97993f2ea5c1f65e1985520}{%
+           family={Miikkulainen},
+           familyi={M\bibinitperiod},
+           given={Risto},
+           giveni={R\bibinitperiod}}}%
+        {{hash=cd20c341249f4e0cd9cb16431e439823}{%
+           family={Stanley},
+           familyi={S\bibinitperiod},
+           given={Kenneth\bibnamedelima O.},
+           giveni={K\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Montreal, Québec, Canada}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{9b567a19cec395921fca76a28d1a413e}
+      \strng{fullhash}{9b567a19cec395921fca76a28d1a413e}
+      \strng{fullhashraw}{9b567a19cec395921fca76a28d1a413e}
+      \strng{bibnamehash}{9b567a19cec395921fca76a28d1a413e}
+      \strng{authorbibnamehash}{9b567a19cec395921fca76a28d1a413e}
+      \strng{authornamehash}{9b567a19cec395921fca76a28d1a413e}
+      \strng{authorfullhash}{9b567a19cec395921fca76a28d1a413e}
+      \strng{authorfullhashraw}{9b567a19cec395921fca76a28d1a413e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Neuroevolution, i.e. evolution of artificial neural networks, has recently emerged as a powerful technique for solving challenging reinforcement learning problems. Compared to traditional (e.g. value-function based) methods, neuroevolution is especially strong in domains where the state of the world is not fully known: the state can be disambiguated through recurrency, and novel situations handled through pattern matching. In this tutorial, we will review (1) neuroevolution methods that evolve fixed-topology networks, network topologies, and network construction processes, (2) ways of combining traditional neural network learning algorithms with evolutionary methods, and (3) applications of neuroevolution to game playing, robot control, resource optimization, and cognitive science.}
+      \field{booktitle}{Proceedings of the 11th Annual Conference Companion on Genetic and Evolutionary Computation Conference: Late Breaking Papers}
+      \field{isbn}{9781605585055}
+      \field{series}{GECCO '09}
+      \field{title}{Evolving neural networks}
+      \field{year}{2009}
+      \field{pages}{2977\bibrangedash 3014}
+      \range{pages}{38}
+      \verb{doi}
+      \verb 10.1145/1570256.1570410
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/1570256.1570410
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/1570256.1570410
+      \endverb
+      \keyw{sequential decision tasks,neural networks,evolutionary computation,control,cognitive science}
+    \endentry
+    \entry{Applebaum}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=ee19e247cced4166966664ea8c7886a5}{%
+           family={Applebaum},
+           familyi={A\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a53113bbb4850bba20c8349f3f77640f}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Doug},
+           giveni={D\bibinitperiod}}}%
+        {{hash=19f2671b89f57d5a2adf80d34fb3b2b1}{%
+           family={Strom},
+           familyi={S\bibinitperiod},
+           given={Blake},
+           giveni={B\bibinitperiod}}}%
+        {{hash=9a5ca73c48fd2c36f2b2fc4b005cb7df}{%
+           family={Korban},
+           familyi={K\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=4ffb0d13219b8e297184ceda6827dc70}{%
+           family={Wolf},
+           familyi={W\bibinitperiod},
+           given={Ross},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Los Angeles, California, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{a7a0499532e6ba95fb4c8b625b832055}
+      \strng{fullhash}{42f5e22180bfdf9dd81a754c291a0d53}
+      \strng{fullhashraw}{42f5e22180bfdf9dd81a754c291a0d53}
+      \strng{bibnamehash}{42f5e22180bfdf9dd81a754c291a0d53}
+      \strng{authorbibnamehash}{42f5e22180bfdf9dd81a754c291a0d53}
+      \strng{authornamehash}{a7a0499532e6ba95fb4c8b625b832055}
+      \strng{authorfullhash}{42f5e22180bfdf9dd81a754c291a0d53}
+      \strng{authorfullhashraw}{42f5e22180bfdf9dd81a754c291a0d53}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Red teams play a critical part in assessing the security of a network by actively probing it for weakness and vulnerabilities. Unlike penetration testing - which is typically focused on exploiting vulnerabilities - red teams assess the entire state of a network by emulating real adversaries, including their techniques, tactics, procedures, and goals. Unfortunately, deploying red teams is prohibitive: cost, repeatability, and expertise all make it difficult to consistently employ red team tests. We seek to solve this problem by creating a framework for automated red team emulation, focused on what the red team does post-compromise - i.e., after the perimeter has been breached. Here, our program acts as an automated and intelligent red team, actively moving through the target network to test for weaknesses and train defenders. At its core, our framework uses an automated planner designed to accurately reason about future plans in the face of the vast amount of uncertainty in red teaming scenarios. Our solution is custom-developed, built on a logical encoding of the cyber environment and adversary profiles, using techniques from classical planning, Markov decision processes, and Monte Carlo simulations. In this paper, we report on the development of our framework, focusing on our planning system. We have successfully validated our planner against other techniques via a custom simulation. Our tool itself has successfully been deployed to identify vulnerabilities and is currently used to train defending blue teams.}
+      \field{booktitle}{Proceedings of the 32nd Annual Conference on Computer Security Applications}
+      \field{isbn}{9781450347716}
+      \field{series}{ACSAC '16}
+      \field{title}{Intelligent, automated red team emulation}
+      \field{year}{2016}
+      \field{pages}{363\bibrangedash 373}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1145/2991079.2991111
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/2991079.2991111
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/2991079.2991111
+      \endverb
+      \keyw{advanced persistent threat,automated planning,formal methods in security,network security,penetration testing,red teaming}
+    \endentry
+    \entry{Kolosnjaji}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=bc3e57ec3967502df76c92733ca0fee5}{%
+           family={Kolosnjaji},
+           familyi={K\bibinitperiod},
+           given={Bojan},
+           giveni={B\bibinitperiod}}}%
+        {{hash=83978744f4bd511a12c8316b278936c0}{%
+           family={Zarras},
+           familyi={Z\bibinitperiod},
+           given={Apostolis},
+           giveni={A\bibinitperiod}}}%
+        {{hash=68196e60cf1f44776ebe1ca376adb183}{%
+           family={Webster},
+           familyi={W\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod}}}%
+        {{hash=cd9b8b6ad8b07ad6c0e7ff77e3340a14}{%
+           family={Eckert},
+           familyi={E\bibinitperiod},
+           given={Claudia},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Hobart, TAS, Australia}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{1c4bf2b209a889cd03c0ed80e59c76e5}
+      \strng{fullhash}{5dba8626028d09ffa4adab098329586b}
+      \strng{fullhashraw}{5dba8626028d09ffa4adab098329586b}
+      \strng{bibnamehash}{5dba8626028d09ffa4adab098329586b}
+      \strng{authorbibnamehash}{5dba8626028d09ffa4adab098329586b}
+      \strng{authornamehash}{1c4bf2b209a889cd03c0ed80e59c76e5}
+      \strng{authorfullhash}{5dba8626028d09ffa4adab098329586b}
+      \strng{authorfullhashraw}{5dba8626028d09ffa4adab098329586b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The increase in number and variety of malware samples amplifies the need for improvement in automatic detection and classification of the malware variants. Machine learning is a natural choice to cope with this increase, because it addresses the need of discovering underlying patterns in large-scale datasets. Nowadays, neural network methodology has been grown to the state that can surpass limitations of previous machine learning methods, such as Hidden Markov Models and Support Vector Machines. As a consequence, neural networks can now offer superior classification accuracy in many domains, such as computer vision or natural language processing. This improvement comes from the possibility of constructing neural networks with a higher number of potentially diverse layers and is known as Deep Learning.In this paper, we attempt to transfer these performance improvements to model the malware system call sequences for the purpose of malware classification. We construct a neural network based on convolutional and recurrent network layers in order to obtain the best features for classification. This way we get a hierarchical feature extraction architecture that combines convolution of n-grams with full sequential modeling. Our evaluation results demonstrate that our approach outperforms previously used methods in malware classification, being able to achieve an average of 85.6\% on precision and 89.4\% on recall using this combined neural network architecture.}
+      \field{booktitle}{AI 2016: Advances in Artificial Intelligence: 29th Australasian Joint Conference, Hobart, TAS, Australia, December 5-8, 2016, Proceedings}
+      \field{isbn}{978-3-319-50126-0}
+      \field{title}{Deep Learning for Classification of Malware System Call Sequences}
+      \field{year}{2016}
+      \field{pages}{137\bibrangedash 149}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1007/978-3-319-50127-7_11
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-319-50127-7_11
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-319-50127-7_11
+      \endverb
+    \endentry
+    \entry{Chen}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=75892be8f066fb2c6f38e2254fd1aca5}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Lingwei},
+           giveni={L\bibinitperiod}}}%
+        {{hash=602204a17fe33009eac55b67900e36b4}{%
+           family={Ye},
+           familyi={Y\bibinitperiod},
+           given={Yanfang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=17a7de8c2c6498181f2d50383aec99bb}{%
+           family={Bourlai},
+           familyi={B\bibinitperiod},
+           given={Thirimachos},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{1264080d88f23d417550c19162bcb7cf}
+      \strng{fullhash}{5bd19151f462f22b635666e294b1827c}
+      \strng{fullhashraw}{5bd19151f462f22b635666e294b1827c}
+      \strng{bibnamehash}{5bd19151f462f22b635666e294b1827c}
+      \strng{authorbibnamehash}{5bd19151f462f22b635666e294b1827c}
+      \strng{authornamehash}{1264080d88f23d417550c19162bcb7cf}
+      \strng{authorfullhash}{5bd19151f462f22b635666e294b1827c}
+      \strng{authorfullhashraw}{5bd19151f462f22b635666e294b1827c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{09}
+      \field{title}{Adversarial Machine Learning in Malware Detection: Arms Race between Evasion Attack and Defense}
+      \field{year}{2017}
+      \field{pages}{99\bibrangedash 106}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/EISIC.2017.21
+      \endverb
+    \endentry
+    \entry{Damodaran}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=c6d1305a3d2c2b5ba68d41b3fac5d48c}{%
+           family={Damodaran},
+           familyi={D\bibinitperiod},
+           given={Anusha},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4f179fd4c4179ade21059cacbec3f838}{%
+           family={Di\bibnamedelima Troia},
+           familyi={D\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d781ead4711ab58f19e64d5c3caa355c}{%
+           family={Visaggio},
+           familyi={V\bibinitperiod},
+           given={Corrado\bibnamedelima Aaron},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=7eb30a6aa3dd43aba2cc23763980a65a}{%
+           family={Austin},
+           familyi={A\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=799c6648cb97b6ffb4e9da11a6e277ac}{%
+           family={Stamp},
+           familyi={S\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{c527e8820629924e8da9a2da431d33b3}
+      \strng{fullhash}{631935ccd0e9705db1e75d9eec8bb17c}
+      \strng{fullhashraw}{631935ccd0e9705db1e75d9eec8bb17c}
+      \strng{bibnamehash}{631935ccd0e9705db1e75d9eec8bb17c}
+      \strng{authorbibnamehash}{631935ccd0e9705db1e75d9eec8bb17c}
+      \strng{authornamehash}{c527e8820629924e8da9a2da431d33b3}
+      \strng{authorfullhash}{631935ccd0e9705db1e75d9eec8bb17c}
+      \strng{authorfullhashraw}{631935ccd0e9705db1e75d9eec8bb17c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computer Virology and Hacking Techniques}
+      \field{month}{02}
+      \field{title}{A comparison of static, dynamic, and hybrid analysis for malware detection}
+      \field{volume}{13}
+      \field{year}{2017}
+      \verb{doi}
+      \verb 10.1007/s11416-015-0261-z
+      \endverb
+    \endentry
+    \entry{Kalash2018}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=1982813fb7c2608913368f57a717c8c9}{%
+           family={Kalash},
+           familyi={K\bibinitperiod},
+           given={Mahmoud},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c892884c0259d4542686d7ac50d75436}{%
+           family={Rochan},
+           familyi={R\bibinitperiod},
+           given={Mrigank},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2ad5a4346f9c464dc7f6f5fa94310610}{%
+           family={Mohammed},
+           familyi={M\bibinitperiod},
+           given={Noman},
+           giveni={N\bibinitperiod}}}%
+        {{hash=6697a9793cb996ecdaee81dd56f4aa84}{%
+           family={Bruce},
+           familyi={B\bibinitperiod},
+           given={Neil\bibnamedelimb D.\bibnamedelimi B.},
+           giveni={N\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=a84866b4900b3fe9a714de1f78dbf282}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=d02b735fb63479bb1cbe11d8ea4b4a32}{%
+           family={Iqbal},
+           familyi={I\bibinitperiod},
+           given={Farkhund},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{966d7c54a26704975d0997c73a6e4343}
+      \strng{fullhash}{e27ea6df4e577e3cc4018dd09e0ad320}
+      \strng{fullhashraw}{e27ea6df4e577e3cc4018dd09e0ad320}
+      \strng{bibnamehash}{e27ea6df4e577e3cc4018dd09e0ad320}
+      \strng{authorbibnamehash}{e27ea6df4e577e3cc4018dd09e0ad320}
+      \strng{authornamehash}{966d7c54a26704975d0997c73a6e4343}
+      \strng{authorfullhash}{e27ea6df4e577e3cc4018dd09e0ad320}
+      \strng{authorfullhashraw}{e27ea6df4e577e3cc4018dd09e0ad320}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 9th IFIP International Conference on New Technologies, Mobility and Security (NTMS)}
+      \field{title}{Malware Classification with Deep Convolutional Neural Networks}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/NTMS.2018.8328749
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1109/NTMS.2018.8328749
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1109/NTMS.2018.8328749
+      \endverb
+    \endentry
+    \entry{Onwuzurike}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=28cb7c009f1c16a2913460622463e641}{%
+           family={Onwuzurike},
+           familyi={O\bibinitperiod},
+           given={Lucky},
+           giveni={L\bibinitperiod}}}%
+        {{hash=961233f54acc06203b1f462ee3d5fd51}{%
+           family={Almeida},
+           familyi={A\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1d8e74cdaeb10f68650925e4e6154bbc}{%
+           family={Mariconti},
+           familyi={M\bibinitperiod},
+           given={Enrico},
+           giveni={E\bibinitperiod}}}%
+        {{hash=a8a519bc70e04e7629dd1ea8243dae7f}{%
+           family={Blackburn},
+           familyi={B\bibinitperiod},
+           given={Jeremy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=07b2d90729a162eed7c5c2a99eb09693}{%
+           family={Stringhini},
+           familyi={S\bibinitperiod},
+           given={Gianluca},
+           giveni={G\bibinitperiod}}}%
+        {{hash=033c5fb9769ba7ff367dd1dea6a86845}{%
+           family={De\bibnamedelima Cristofaro},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Emiliano},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{d849f8a67391aacb136756f5bf56e236}
+      \strng{fullhash}{c173859729d26cc4ebfd8478ec0895ba}
+      \strng{fullhashraw}{c173859729d26cc4ebfd8478ec0895ba}
+      \strng{bibnamehash}{c173859729d26cc4ebfd8478ec0895ba}
+      \strng{authorbibnamehash}{c173859729d26cc4ebfd8478ec0895ba}
+      \strng{authornamehash}{d849f8a67391aacb136756f5bf56e236}
+      \strng{authorfullhash}{c173859729d26cc4ebfd8478ec0895ba}
+      \strng{authorfullhashraw}{c173859729d26cc4ebfd8478ec0895ba}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{08}
+      \field{title}{A Family of Droids–Android Malware Detection via Behavioral Modeling: Static vs Dynamic Analysis}
+      \field{year}{2018}
+      \verb{doi}
+      \verb 10.1109/PST.2018.8514191
+      \endverb
+    \endentry
+    \entry{Oliveira2019}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=81ada250d9813de5650af243aa69ded5}{%
+           family={Oliveira},
+           familyi={O\bibinitperiod},
+           given={Angelo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c5545b1de850c3a8b89e08b66068118d}{%
+           family={Sassi},
+           familyi={S\bibinitperiod},
+           given={Renato\bibnamedelima José},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{191dbc32f3c9b3f77043b2afefa75f84}
+      \strng{fullhash}{191dbc32f3c9b3f77043b2afefa75f84}
+      \strng{fullhashraw}{191dbc32f3c9b3f77043b2afefa75f84}
+      \strng{bibnamehash}{191dbc32f3c9b3f77043b2afefa75f84}
+      \strng{authorbibnamehash}{191dbc32f3c9b3f77043b2afefa75f84}
+      \strng{authornamehash}{191dbc32f3c9b3f77043b2afefa75f84}
+      \strng{authorfullhash}{191dbc32f3c9b3f77043b2afefa75f84}
+      \strng{authorfullhashraw}{191dbc32f3c9b3f77043b2afefa75f84}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{TechRxiv Preprint}
+      \field{title}{Behavioral Malware Detection Using Deep Graph Convolutional Neural Networks}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.36227/techrxiv.10043090
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.36227/techrxiv.10043090
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.36227/techrxiv.10043090
+      \endverb
+    \endentry
+    \entry{Catak2020}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=a755343671cf27650ca2dc281728d5f0}{%
+           family={Catak},
+           familyi={C\bibinitperiod},
+           given={Ferhat\bibnamedelima Ozgur},
+           giveni={F\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=cd87ecc5056fee354aab22c9e74a2325}{%
+           family={Yazi},
+           familyi={Y\bibinitperiod},
+           given={Ahmed\bibnamedelima F.},
+           giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=8d84590498b9a21b1aecbf3cd50b13b6}{%
+           family={Elezaj},
+           familyi={E\bibinitperiod},
+           given={Ogerta},
+           giveni={O\bibinitperiod}}}%
+        {{hash=e1e17894b1b39638e13f7d616683b650}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Javed},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{18f3bd72d85825a6beabdbc22a628a06}
+      \strng{fullhash}{5e40ac4e4285a56bd8f6087905991291}
+      \strng{fullhashraw}{5e40ac4e4285a56bd8f6087905991291}
+      \strng{bibnamehash}{5e40ac4e4285a56bd8f6087905991291}
+      \strng{authorbibnamehash}{5e40ac4e4285a56bd8f6087905991291}
+      \strng{authornamehash}{18f3bd72d85825a6beabdbc22a628a06}
+      \strng{authorfullhash}{5e40ac4e4285a56bd8f6087905991291}
+      \strng{authorfullhashraw}{5e40ac4e4285a56bd8f6087905991291}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PeerJ Computer Science}
+      \field{title}{Deep Learning Based Sequential Model for Malware Analysis Using Windows exe API Calls}
+      \field{volume}{6}
+      \field{year}{2020}
+      \field{pages}{e285}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.7717/peerj-cs.285
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.7717/peerj-cs.285
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.7717/peerj-cs.285
+      \endverb
+    \endentry
+    \entry{Kotyan}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=e9cb77d5859c10af0eaa20830e5bba11}{%
+           family={Kotyan},
+           familyi={K\bibinitperiod},
+           given={Shashank},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6c4e48aa0ceadfdf741d9a8d2f05ff7e}{%
+           family={Vargas},
+           familyi={V\bibinitperiod},
+           given={Danilo},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \strng{fullhash}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \strng{fullhashraw}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \strng{bibnamehash}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \strng{authorbibnamehash}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \strng{authornamehash}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \strng{authorfullhash}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \strng{authorfullhashraw}{6b7382a727dabf7762c7fd981ee1fcc1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{07}
+      \field{title}{Towards evolving robust neural architectures to defend from adversarial attacks}
+      \field{year}{2020}
+      \field{pages}{135\bibrangedash 136}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1145/3377929.3389962
+      \endverb
+    \endentry
+    \entry{Galloro}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=e62aee4d3b8c94073746fe94213a8174}{%
+           family={Galloro},
+           familyi={G\bibinitperiod},
+           given={Nicola},
+           giveni={N\bibinitperiod}}}%
+        {{hash=e6edd6e42b5c7e1a8dbd0da63bef461a}{%
+           family={Polino},
+           familyi={P\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3f7600f962547a2e55f46e854b95022a}{%
+           family={Carminati},
+           familyi={C\bibinitperiod},
+           given={Michele},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cd3cfc182bb5ed1de25c6068401feb18}{%
+           family={Continella},
+           familyi={C\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a53063063aa9f3b678c152d8e4b34e17}{%
+           family={Zanero},
+           familyi={Z\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {GBR}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier Advanced Technology Publications}%
+      }
+      \strng{namehash}{21b9105f6557d72ee1600887c5d3957a}
+      \strng{fullhash}{5de4c753f52e16c6d3afd67fdf1f03df}
+      \strng{fullhashraw}{5de4c753f52e16c6d3afd67fdf1f03df}
+      \strng{bibnamehash}{5de4c753f52e16c6d3afd67fdf1f03df}
+      \strng{authorbibnamehash}{5de4c753f52e16c6d3afd67fdf1f03df}
+      \strng{authornamehash}{21b9105f6557d72ee1600887c5d3957a}
+      \strng{authorfullhash}{5de4c753f52e16c6d3afd67fdf1f03df}
+      \strng{authorfullhashraw}{5de4c753f52e16c6d3afd67fdf1f03df}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0167-4048}
+      \field{journaltitle}{Comput. Secur.}
+      \field{month}{2}
+      \field{number}{C}
+      \field{title}{A Systematical and longitudinal study of evasive behaviors in windows malware}
+      \field{volume}{113}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.1016/j.cose.2021.102550
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/j.cose.2021.102550
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/j.cose.2021.102550
+      \endverb
+    \endentry
+    \entry{Ganugapati}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=104a4bf5c00bd0e021d6ffbb58bd007e}{%
+           family={Ganugapati},
+           familyi={G\bibinitperiod},
+           given={Sai\bibnamedelima Alekhya},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=39acca814eae9fb4589005e42e6a9c6c}{%
+           family={Prabhu},
+           familyi={P\bibinitperiod},
+           given={Sandeep},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \strng{fullhash}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \strng{fullhashraw}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \strng{bibnamehash}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \strng{authorbibnamehash}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \strng{authornamehash}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \strng{authorfullhash}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \strng{authorfullhashraw}{f69a4bc3e3da4b5e618ce5c2a64d5d2d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2023 8th International Conference on Communication and Electronics Systems (ICCES)}
+      \field{title}{Unifying Governance, Risk and Controls Framework Using SDLC, CICD and DevOps}
+      \field{year}{2023}
+      \field{pages}{1797\bibrangedash 1802}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICCES57224.2023.10192730
+      \endverb
+      \keyw{Codes;Buildings;Organizations;Software;Pipeline processing;SDLC;IT Project;CICD;DevOps;Risks;Governance}
+    \endentry
+    \entry{Marandi}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=6732333e886556b369c4c2a3d9daa51a}{%
+           family={Marandi},
+           familyi={M\bibinitperiod},
+           given={Manohar},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4e86f6e90f452d4e8f810c671cba16a2}{%
+           family={Bertia},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1998239a95f9b807e2707fa8adac5cd6}{%
+           family={Silas},
+           familyi={S\bibinitperiod},
+           given={Salaja},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{fea0c12408b753e19d26dbacf4f6a058}
+      \strng{fullhash}{f636b54d9b9877c4b9a8c956d1ed9f17}
+      \strng{fullhashraw}{f636b54d9b9877c4b9a8c956d1ed9f17}
+      \strng{bibnamehash}{f636b54d9b9877c4b9a8c956d1ed9f17}
+      \strng{authorbibnamehash}{f636b54d9b9877c4b9a8c956d1ed9f17}
+      \strng{authornamehash}{fea0c12408b753e19d26dbacf4f6a058}
+      \strng{authorfullhash}{f636b54d9b9877c4b9a8c956d1ed9f17}
+      \strng{authorfullhashraw}{f636b54d9b9877c4b9a8c956d1ed9f17}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2023 World Conference on Communication \& Computing (WCONF)}
+      \field{title}{Implementing and Automating Security Scanning to a DevSecOps CI/CD Pipeline}
+      \field{year}{2023}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/WCONF58270.2023.10235015
+      \endverb
+      \keyw{Industries;Pipelines;Containers;Application security;Software;Real-time systems;Security;Security Scanning;DevSecOps;Continuous Integration and Continuous Deployment (CICD);Static application security testing(SAST);Dynamic application security testing (DAST)}
+    \endentry
+    \entry{Abdiukov}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=eeee87a7890b38544b34286db33637e9}{%
+           family={Abdiukov},
+           familyi={A\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{eeee87a7890b38544b34286db33637e9}
+      \strng{fullhash}{eeee87a7890b38544b34286db33637e9}
+      \strng{fullhashraw}{eeee87a7890b38544b34286db33637e9}
+      \strng{bibnamehash}{eeee87a7890b38544b34286db33637e9}
+      \strng{authorbibnamehash}{eeee87a7890b38544b34286db33637e9}
+      \strng{authornamehash}{eeee87a7890b38544b34286db33637e9}
+      \strng{authorfullhash}{eeee87a7890b38544b34286db33637e9}
+      \strng{authorfullhashraw}{eeee87a7890b38544b34286db33637e9}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{World Journal of Advanced Research and Reviews}
+      \field{month}{04}
+      \field{title}{Automated security testing in DevSecOps pipelines: Integrating AI-based vulnerability discovery and compliance validation}
+      \field{volume}{22}
+      \field{year}{2024}
+      \field{pages}{2083\bibrangedash 2093}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.30574/wjarr.2024.22.1.1083
+      \endverb
+    \endentry
+    \entry{RaduMihalache}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=a92f0c4ac270ae3fa2b79acbe6fd0480}{%
+           family={Mihalache},
+           familyi={M\bibinitperiod},
+           given={Radu},
+           giveni={R\bibinitperiod}}}%
+        {{hash=adf4a1e8318aa622f242cc840bb9f9d2}{%
+           family={Gavriluț},
+           familyi={G\bibinitperiod},
+           given={Dragoș},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d453e4274fd9d81ea89e6f5e45d01cc2}{%
+           family={Anton},
+           familyi={A\bibinitperiod},
+           given={Dan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {INSTICC}%
+      }
+      \list{publisher}{1}{%
+        {SciTePress}%
+      }
+      \strng{namehash}{f973b56a3404714fb59e830eaee1747f}
+      \strng{fullhash}{32cc2541e82bfa50a0cea1e4758c5f0e}
+      \strng{fullhashraw}{32cc2541e82bfa50a0cea1e4758c5f0e}
+      \strng{bibnamehash}{32cc2541e82bfa50a0cea1e4758c5f0e}
+      \strng{authorbibnamehash}{32cc2541e82bfa50a0cea1e4758c5f0e}
+      \strng{authornamehash}{f973b56a3404714fb59e830eaee1747f}
+      \strng{authorfullhash}{32cc2541e82bfa50a0cea1e4758c5f0e}
+      \strng{authorfullhashraw}{32cc2541e82bfa50a0cea1e4758c5f0e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 16th International Conference on Agents and Artificial Intelligence - Volume 3: ICAART}
+      \field{isbn}{978-989-758-680-4}
+      \field{title}{Real-Time Deep Learning-Based Malware Detection Using Static and Dynamic Features}
+      \field{year}{2024}
+      \field{pages}{226\bibrangedash 234}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.5220/0012316800003636
+      \endverb
+    \endentry
+    \entry{Shi}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=9f8abb804804c3628a1da32eade6800a}{%
+           family={Shi},
+           familyi={S\bibinitperiod},
+           given={Tengfei},
+           giveni={T\bibinitperiod}}}%
+        {{hash=769a0a0b64857bb9a8aeb9eb940614c9}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shihai},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f98d5d63fbe542a5f9a64aed46c16a99}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Haoran},
+           giveni={H\bibinitperiod}}}%
+        {{hash=7637c98dc8c38f585dd099d27e689784}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Shudi},
+           giveni={S\bibinitperiod}}}%
+        {{hash=93c82128aca25c57cfb17e90d02136d5}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{b1b2075bc99c2543144caf667cbb7199}
+      \strng{fullhash}{811e7ebde5780114700b259010024356}
+      \strng{fullhashraw}{811e7ebde5780114700b259010024356}
+      \strng{bibnamehash}{811e7ebde5780114700b259010024356}
+      \strng{authorbibnamehash}{811e7ebde5780114700b259010024356}
+      \strng{authornamehash}{b1b2075bc99c2543144caf667cbb7199}
+      \strng{authorfullhash}{811e7ebde5780114700b259010024356}
+      \strng{authorfullhashraw}{811e7ebde5780114700b259010024356}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{07}
+      \field{title}{Generating Adversarial Samples Based on the Attack Robust Training Model}
+      \field{year}{2024}
+      \field{pages}{896\bibrangedash 901}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/QRS-C63300.2024.00119
+      \endverb
+    \endentry
+    \entry{Ashtagi}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=033cc93471840c3221f286fd57cba287}{%
+           family={Ashtagi},
+           familyi={A\bibinitperiod},
+           given={Rashmi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=c859699edc47c7c90c79b198af8e1372}{%
+           family={Belani},
+           familyi={B\bibinitperiod},
+           given={Chirag},
+           giveni={C\bibinitperiod}}}%
+        {{hash=97905850061afa7fcbaf9874f353bab9}{%
+           family={Bhalerao},
+           familyi={B\bibinitperiod},
+           given={Prasanna},
+           giveni={P\bibinitperiod}}}%
+        {{hash=443beb41f59228a10e64ee0f2e4705cc}{%
+           family={Bhalerao},
+           familyi={B\bibinitperiod},
+           given={Yash},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=7a9c2890129cfb9734f691f87b67362e}{%
+           family={Chawle},
+           familyi={C\bibinitperiod},
+           given={Atharva},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{82ac071723e5de267c43a7ef9682db3c}
+      \strng{fullhash}{a8d4981789fe7b3c7f01136bbcc363d3}
+      \strng{fullhashraw}{a8d4981789fe7b3c7f01136bbcc363d3}
+      \strng{bibnamehash}{a8d4981789fe7b3c7f01136bbcc363d3}
+      \strng{authorbibnamehash}{a8d4981789fe7b3c7f01136bbcc363d3}
+      \strng{authornamehash}{82ac071723e5de267c43a7ef9682db3c}
+      \strng{authorfullhash}{a8d4981789fe7b3c7f01136bbcc363d3}
+      \strng{authorfullhashraw}{a8d4981789fe7b3c7f01136bbcc363d3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2025 International Conference on Computational, Communication and Information Technology (ICCCIT)}
+      \field{title}{Building Resilient CICD Pipelines: A DevOps Security-First Framework}
+      \field{year}{2025}
+      \field{pages}{828\bibrangedash 834}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/ICCCIT62592.2025.10927871
+      \endverb
+      \keyw{Cloud computing;DevOps;Codes;Scalability;Pipelines;Continuous integration;Security;Observability;Monitoring;Testing;Continuous Integration/Continuous Delivery (CI/CD);DevOps workflow;Infrastructure as Code (IaC);Amazon Web Services (AWS) Cloud Solutions;Terraform;Kubernetes;Docker;Jenkins;ArgoCD;SonarQube;OWASP Dependency Checker;Trivy;Prometheus;Grafana;Version control systems;Cloud system architecture;Containerization technology;Scalability solutions;Observability tools;Automated testing processes;Continuous deployment;Build automation techniques;Email/JIRA integration}
+    \endentry
+    \entry{Dikshant}{unknown}{}{}
+      \name{author}{2}{}{%
+        {{hash=a8e8bf8c30c737e71e31a3a632aa2b8b}{%
+           family={Dikshant},
+           familyi={D\bibinitperiod}}}%
+        {{hash=b4e19c11faf374e2a8c2cf4e72c31cb5}{%
+           family={Verma},
+           familyi={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{96579d9dad59e2e1bc926be296d58a61}
+      \strng{fullhash}{96579d9dad59e2e1bc926be296d58a61}
+      \strng{fullhashraw}{96579d9dad59e2e1bc926be296d58a61}
+      \strng{bibnamehash}{96579d9dad59e2e1bc926be296d58a61}
+      \strng{authorbibnamehash}{96579d9dad59e2e1bc926be296d58a61}
+      \strng{authornamehash}{96579d9dad59e2e1bc926be296d58a61}
+      \strng{authorfullhash}{96579d9dad59e2e1bc926be296d58a61}
+      \strng{authorfullhashraw}{96579d9dad59e2e1bc926be296d58a61}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{08}
+      \field{title}{Reducing False Positives with Active Behavioral Analysis for Cloud Security}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.48550/arXiv.2508.12584
+      \endverb
+    \endentry
+    \entry{Modalavalasa}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=adf729f3953a654f6dfab7b0f4662414}{%
+           family={Modalavalasa},
+           familyi={M\bibinitperiod},
+           given={Godavari},
+           giveni={G\bibinitperiod}}}%
+        {{hash=6a275e55550914b39529c97083178c5e}{%
+           family={Yadav},
+           familyi={Y\bibinitperiod},
+           given={Pranay},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{a476753173c1f70b5121ba10ec6826ad}
+      \strng{fullhash}{a476753173c1f70b5121ba10ec6826ad}
+      \strng{fullhashraw}{a476753173c1f70b5121ba10ec6826ad}
+      \strng{bibnamehash}{a476753173c1f70b5121ba10ec6826ad}
+      \strng{authorbibnamehash}{a476753173c1f70b5121ba10ec6826ad}
+      \strng{authornamehash}{a476753173c1f70b5121ba10ec6826ad}
+      \strng{authorfullhash}{a476753173c1f70b5121ba10ec6826ad}
+      \strng{authorfullhashraw}{a476753173c1f70b5121ba10ec6826ad}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2025 3rd International Conference on Inventive Computing and Informatics (ICICI)}
+      \field{title}{A Hybrid Approach to Cloud Database Security: Integrating DL and Machine Learning for Threat Detection and Prevention}
+      \field{year}{2025}
+      \field{pages}{1147\bibrangedash 1154}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ICICI65870.2025.11069530
+      \endverb
+      \keyw{Training;Performance evaluation;Accuracy;Databases;Prevention and mitigation;Telecommunication traffic;Threat assessment;Complexity theory;Computer security;Testing;Cybersecurity;Threat detection;attack;Threat Prevention;Cloud Database Security;CICDS 2019 dataset;machine learning;Deep learning}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

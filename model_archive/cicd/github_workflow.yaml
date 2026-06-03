@@ -1,0 +1,60 @@
+name: Adaptive Threat Detection Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9"
+        
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install torch numpy pandas pillow tqdm
+        # Assuming we have saved our requirements
+        # pip install -r requirements.txt
+        
+    - name: Download Model Checkpoint
+      run: |
+        # In a real scenario, fetch this from S3 / Azure Blob / DVC
+        mkdir -p checkpoints
+        # wget https://storage.yourcompany.com/models/best_model.pth -O checkpoints/best_model.pth
+        
+    - name: Build Application
+      run: |
+        echo "Building application..."
+        # ./build.sh
+        # Produce artifact at ./dist/app.exe
+        
+    - name: Security Scan (Adaptive Threat Detection)
+      id: scan
+      continue-on-error: false
+      run: |
+        echo "Starting Adaptive Security Check..."
+        # Assuming the build produced 'app.exe'
+        # In this repo, scanning a dummy file for demo
+        touch app.exe
+        python cicd/scan.py app.exe
+        
+    - name: Deploy
+      if: success()
+      run: |
+        echo "Security check passed. Deploying..."
+        # ./deploy.sh
+        
+    - name: Notify Security Team (On Failure)
+      if: failure()
+      run: |
+        echo "Security check FAILED. Artefact isolated."
+        # Send Slack/Teams notification

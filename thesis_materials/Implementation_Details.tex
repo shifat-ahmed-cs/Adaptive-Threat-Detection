@@ -1,0 +1,141 @@
+\section{Implementation Details}
+\label{sec:implementation_details}
+
+This section delineates the technical realization of the Adaptive Threat Detection framework, detailing the software environment, algorithmic formulations, and architectural logic that translate the proposed design into a functional operational model.
+
+\subsection{Development Environment \& Technology Stack}
+The experimental framework utilizes the following configuration, ensuring reproducibility and compatibility with contemporary deep learning workflows.
+
+\subsubsection{Programming Languages \& Core Libraries}
+\begin{itemize}
+    \item \textbf{Python 3.10+}: Employed as the primary development language, selected for its extensive ecosystem supporting scientific computing and rapid prototyping.
+    \item \textbf{Deep Learning Framework}:
+    \begin{itemize}
+        \item \textbf{PyTorch 2.0+}: Utilized for its dynamic computation graph capability (define-by-run), which is essential for implementing self-adaptive architectures requiring runtime layer modification. It serves as the foundational library for the custom Dual-Branch architecture.
+    \end{itemize}
+    \item \textbf{Data Processing}:
+    \begin{itemize}
+        \item \textbf{NumPy ($\geq$ 1.24)}: Leveraged for high-performance n-dimensional array manipulation, specifically for normalizing pixel values and handling tensor transformations.
+        \item \textbf{Pandas ($\geq$ 2.0)}: Used for the efficient ingestion and management of structured datasets, including CSV-based logs and the Kaggle Malware Dataset.
+        \item \textbf{Scikit-Learn}: Implements essential utility functions for dataset stratification, performance metric calculation (Precision, Recall, F1), and confusion matrix generation.
+    \end{itemize}
+    \item \textbf{Visualization}:
+    \begin{itemize}
+        \item \textbf{Matplotlib \& Seaborn}: Employed to generate publication-quality figures, including training loss curves, fusion comparison tables, and class distribution histograms.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Hardware \& Platforms}
+\begin{itemize}
+    \item \textbf{Computing Infrastructure}: Model training was accelerated using NVIDIA CUDA-enabled GPUs, leveraging mixed-precision arithmetic to optimize computational efficiency.
+    \item \textbf{DevOps Integration}:
+    \begin{itemize}
+        \item \textbf{GitHub Actions}: Functions as the Continuous Integration (CI) server, executing the automated scanning pipeline upon every repository commit to verify model integrity.
+        \item \textbf{Jupyter Notebooks}: Facilitated interactive data exploration and the visualization of adversarial mutation effects.
+    \end{itemize}
+\end{itemize}
+
+\subsection{System Architecture Implementation}
+The architectural implementation is modularized into three primary components: Data Preparation, Model Architecture, and Training/Optimization.
+
+\subsubsection{Data Preprocessing Module}
+To facilitate dual-modal learning, raw binary data is transformed into compatible tensor formats:
+
+\begin{enumerate}
+    \item \textbf{Spatial Branch Input}:
+    \begin{itemize}
+        \item Raw PE (Portable Executable) binary files are read as byte streams.
+        \item These byte streams are mapped to grayscale pixel intensities (0-255).
+        \item \textbf{Transformation}: The resulting image representation is resized to \textbf{128x128 pixels} and normalized to the unit interval $[0, 1]$ by dividing by 255.0. This standardization ensures numerical stability during convolution operations.
+    \end{itemize}
+    \item \textbf{Temporal Branch Input}:
+    \begin{itemize}
+        \item API call traces are indexed using a dedicated vocabulary constructed from the training corpus (Vocab Size $\approx$ 307).
+        \item \textbf{Truncation/Padding}: Sequences are standardized to a fixed length of \textbf{100 time steps}. Shorter sequences are zero-padded, while longer ones are truncated to preserve the initial execution behaviors, which contain significant discriminatory information.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Dual-Branch Model Architecture}
+The Dual-Branch Model constitutes the central architectural unit, designed not merely to ensemble distinct models, but to fuse them into a unified feature space.
+
+\begin{itemize}
+    \item \textbf{CNN Branch}: Implements a four-block Convolutional Neural Network. Each block comprises a Convolutional layer (kernel size 3x3), followed by Batch Normalization for covariate shift reduction, ReLU activation, and Max Pooling for spatial downsampling.
+    \item \textbf{LSTM Branch}: Implements a Bidirectional Long Short-Term Memory network.
+    \begin{itemize}
+        \item \textbf{Embedding Layer}: Projects integer-encoded API IDs into a 128-dimensional dense vector space.
+        \item \textbf{Bi-LSTM}: Utilization of forward and backward hidden states enables the capture of contextual dependencies from both preceding and succeeding API calls.
+    \end{itemize}
+    \item \textbf{Feature Fusion}:
+    \begin{itemize}
+        \item The system implements a \textbf{Concatenation Strategy}, merging the 256-dimensional spatial vector and the 256-dimensional temporal vector into a single 512-dimensional representation.
+        \item \textbf{Justification}: Empirical analysis demonstrated that concatenation preserved the highest fidelity of information compared to addition or attention mechanisms (Figure \ref{fig:fusion_comparison}).
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{visualizations/fusion_comparison_table.png}
+    \caption{Feature fusion strategy performance comparison. Concatenation yielded the highest accuracy (98.25\%) and was subsequently selected for the final implementation.}
+    \label{fig:fusion_comparison}
+\end{figure}
+
+\subsubsection{Training \& Optimization Strategy}
+The training regimen is engineered to address the specific challenges inherent in malware detection, most notably class imbalance.
+
+\begin{itemize}
+    \item \textbf{Optimizer}: The \textbf{Adam} optimizer is employed with an initial learning rate of $0.001$ and a weight decay of $1e-5$ to mitigate overfitting.
+    \item \textbf{Learning Rate Scheduler}: A plateau-based scheduler monitors validation loss. Upon a stagnation in improvement for 3 epochs, the learning rate is dynamically reduced by a factor of 0.5, facilitating convergence into sharper local minima.
+    \item \textbf{Loss Function}:
+    \begin{itemize}
+        \item Standard Cross-Entropy Loss was replaced with \textbf{Focal Loss} ($\alpha=1, \gamma=2$).
+        \item \textbf{Rationale}: Focal loss down-weights easy negatives (benign files) and concentrates training gradients on hard positives (obfuscated malware), effectively addressing the significant class imbalance characteristic of threat detection datasets.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Operational Logic \& Adversarial Defense}
+
+\subsubsection{Adversarial Hardening}
+To address the critical requirement of robustness against adversarial attacks, the implementation incorporates an on-the-fly mutation engine. During the training phase, a stochastic process intercepts a batch of API sequences and applies random mutations (Insertion, Replacement) prior to model processing. This methodology compels the LSTM branch to learn features that remain invariant despite noise injection, effectively simulating a defense against \textbf{Dead Code Insertion} attacks.
+
+\paragraph{Comparative Analysis of Mutation Strategies}
+Specific experiments were conducted to determine the optimal training perturbation method. Three primary strategies were evaluated for their ability to confer cross-protection against diverse attacks:
+
+\begin{enumerate}
+    \item \textbf{Random Insert}: Injection of random API calls to disrupt sequence adjacency.
+    \item \textbf{Random Replace}: Substitution of valid calls with noise, simulating polymorphism.
+    \item \textbf{Noise Append}: Concatenation of junk data to the sequence terminus.
+\end{enumerate}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|c|l|}
+        \hline
+        \textbf{Training Strategy} & \textbf{vs. Insert Attack} & \textbf{vs. Replace Attack} & \textbf{Verdict} \\
+        \hline
+        \textbf{Insert Strategy} & \textbf{92.4\%} & \textbf{92.6\%} & \textbf{Optimal}. Learned robust long-term dependencies. \\
+        \hline
+        \textbf{Append Strategy} & 91.0\% & 84.0\% & \textbf{Specialized}. Effective only against tail noise. \\
+        \hline
+        \textbf{Replace Strategy} & 62.4\% & 60.0\% & \textbf{Suboptimal}. Destructive to valid signal patterns. \\
+        \hline
+    \end{tabular}
+    \caption{Comparative analysis of mutation strategies.}
+    \label{tab:mutation_strategies}
+\end{table}
+
+\textbf{Key Insight}: The \textbf{Random Insert} strategy was identified as the superior defense mechanism. By forcing the model to disregard intercalated noise, it implicitly learned to withstand substitution attacks (92.6\% robustness), thereby providing the most comprehensive protection.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{visualizations/dataset_samples.png}
+    \caption{Visualization of input modalities. Left: Entropy-based visualization of a malware binary (CNN input). Right: Integer-encoded API sequence (LSTM input).}
+    \label{fig:dataset_samples}
+\end{figure}
+
+\subsubsection{Continuous Integration (CI) Pipeline}
+The system extends beyond the theoretical model to a functional operational pipeline. A dedicated integration script simulates a production deployment gate:
+\begin{enumerate}
+    \item \textbf{Artifact Detection}: Monitoring of a repository for new binary builds.
+    \item \textbf{Automated Scan}: Loading of the trained model checkpoint and execution of a forward inference pass.
+    \item \textbf{Policy Enforcement}: In instances where the model predicts "Malware" with a confidence exceeding 80\%, the pipeline returns a failure status code, effectively halting the deployment process within the CI environment.
+\end{enumerate}

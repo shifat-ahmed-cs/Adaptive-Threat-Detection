@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: prototype/backend/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - threat_db:/data
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - SQLALCHEMY_DATABASE_URL=sqlite:////data/threat_detection.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./prototype/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  threat_db:
