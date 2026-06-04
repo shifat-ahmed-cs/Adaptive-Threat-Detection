@@ -469,7 +469,7 @@ class App(ctk.CTk):
         try:
             with open(path, 'rb') as f:
                 files = {'file': (path.name, f, 'application/octet-stream')}
-                r = requests.post(f"{self.server_url}/scan", files=files, headers=self.headers, timeout=15)
+                r = requests.post(f"{self.server_url}/scan", files=files, headers=self.headers, timeout=180)
             if r.status_code == 200:
                 res = r.json()
                 res_formatted = {

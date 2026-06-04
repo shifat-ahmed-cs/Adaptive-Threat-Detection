@@ -147,7 +147,7 @@ def scan_files(files, scanner_info, is_hook=False):
             # Send file to FastAPI scan endpoint
             with open(file_path, 'rb') as f:
                 files_payload = {'file': (file_path.name, f, 'application/octet-stream')}
-                r = requests.post(f"{server_url}/scan", files=files_payload, headers=headers, timeout=15)
+                r = requests.post(f"{server_url}/scan", files=files_payload, headers=headers, timeout=180)
                 
             if r.status_code != 200:
                 raise Exception(f"Server returned status code {r.status_code}: {r.text[:200]}")
