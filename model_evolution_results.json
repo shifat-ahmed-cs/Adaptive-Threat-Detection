@@ -1,10 +1,9 @@
 {
   "base_accuracy": 0.9875,
   "base_recall": 0.9925,
-  "candidate_accuracy": null,
-  "candidate_recall": null,
-  "evolution_successful": false,
-  "strategy": "baseline",
-  "epochs": 0,
-  "note": "Verified baseline metrics for adaptive_model_final.pth — evaluated via eval_baseline.py on stratified 20% val set (400 Benign + 400 Malware, seed=42). No evolution has been run yet."
+  "candidate_accuracy": 0.99,
+  "candidate_recall": 0.9975,
+  "evolution_successful": true,
+  "strategy": "random_insert",
+  "epochs": 1
 }
