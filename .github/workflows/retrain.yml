@@ -53,10 +53,6 @@ jobs:
         git config --global user.name "GitHub Action (Model Evolution)"
         git config --global user.email "actions@github.com"
 
-        # Fetch latest remote commits to avoid push rejection due to diverged history
-        git fetch origin main
-        git rebase origin/main || git rebase --abort
-
         # Stage model file (may or may not have changed)
         git add adaptive_model_final.pth
 
@@ -82,6 +78,10 @@ jobs:
             echo "No model improvement. Baseline maintained. Results JSON committed."
           fi
 
+          # Fetch latest remote commits to avoid push rejection due to diverged history
+          git fetch origin main
+          git rebase origin/main || (git rebase --abort && git pull --rebase origin main)
+
           # Push with retry in case of transient failures
-          git push origin HEAD:main || (git pull --rebase origin main && git push origin HEAD:main)
+          git push origin HEAD:main
         fi
