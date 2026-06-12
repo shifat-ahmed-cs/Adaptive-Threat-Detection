@@ -1,0 +1,33 @@
+{
+  "test_metrics": {
+    "accuracy": 0.9483333333333334,
+    "precision": 0.9370860927152318,
+    "recall": 0.9593220338983051,
+    "f1_score": 0.948073701842546,
+    "auc": 0.982117254792998,
+    "true_negatives": 286,
+    "false_positives": 19,
+    "false_negatives": 12,
+    "true_positives": 283,
+    "specificity": 0.9377049180327869,
+    "sensitivity": 0.9593220338983051,
+    "benign_precision": 0.959731543624161,
+    "benign_recall": 0.9377049180327869,
+    "malware_precision": 0.9370860927152318,
+    "malware_recall": 0.9593220338983051,
+    "threshold": 0.5
+  },
+  "model_config": {
+    "cnn_feature_dim": 256,
+    "lstm_hidden_size": 128,
+    "lstm_num_layers": 2,
+    "lstm_feature_dim": 256,
+    "embedding_dim": 128,
+    "fusion_method": "gated"
+  },
+  "checkpoint_path": "checkpoints/best_gated_norm.pth",
+  "test_samples": 600,
+  "benign_samples": 305,
+  "malware_samples": 295,
+  "threshold": 0.5
+}

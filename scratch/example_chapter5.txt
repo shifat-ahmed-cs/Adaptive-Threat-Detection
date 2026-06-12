@@ -1,0 +1,352 @@
+================ PAGE 47 ================
+•Train Loss:0.1176
+•Validation Loss:0.0629
+•Precision:0.9997
+•Recall:0.7002
+•F1-Score:0.8236
+•AUC (Area Under Curve):0.8992
+•Epoch Duration:∼589 seconds
+•GPU Memory Usage:0.23 GB
+The diagram below presents the training and validation performance of the Layer-3
+model, including loss, precision, recall, and other evaluation metrics-
+Figure 4.5: Training and Validation Performance of Layer-3 Model
+These metrics collectively assess both classification and localization performance.
+Detailed numerical results and comparative analyses will be inserted once the final
+testing and validation phases are completed.
+Observed Challenges and Limitations
+Development encountered several technical limitations:
+•Boolean tensor conversion errorsduring validation were corrected through
+explicit float conversion.
+•Windows multiprocessing issuesrequired settingnum workers = 0, low-
+ering speed by 20–30 %.
+38
+================ PAGE 48 ================
+•Python 3.11pathlibinconsistencies were handled by switching toos.walk()
+for dataset scanning.
+•Limited VRAMforced image resizing from512×512to256×256.
+Practical constraints include slower processing on non-GPU systems, occasional false
+positives on natural image textures, and dependence on synthetic rather than real-
+world malware data. Despite these issues, the layer provides fine-grained local-
+ization, contextual awareness, and production-ready checkpointing, establishing a
+strong foundation for detecting steganographic or hidden malware within image
+files.
+Layer 3 is designed to perform an exhaustive content-level analysis on files that were
+able to evade previous static and behavioral analyses. Initially, Layer 3 adopted
+a CNN-based approach to steganography detection, focusing on detecting hidden
+malicious content within image files. Although it was effective in detecting stegano-
+graphic content, it was found to be less robust in detecting stego files created using
+different steganographic algorithms. In addition, it failed to perform well when de-
+tecting malware embedded in files other than images. The reliance on assumptions
+about file type, structure, and embedding technique also made it less effective in
+detecting zero-day malware.
+In order to overcome these shortcomings, Layer 3 was redesigned to operate on
+raw byte sequences, eliminating the need to assume file structure, encoding, or
+embedding technique. As a result, Layer 3 adopted a deep learning-based approach
+to detecting malware, relying on theMalConvGCT model, which is effective in
+detecting unknown malware variants in executable files of any length.
+Proposed Approach: MalConvGCT Byte-Level Model
+The new Layer 3 architecture is based on the deep learning frameworkMalCon-
+vGCT, specifically tailored for malware detection. This approach differs from tra-
+ditional malware analysis techniques, as it does not require feature extraction or
+disassembly of executables. Instead, it operates directly on executable files as se-
+quences of bytes, providing a more general and robust detection method.
+Byte Representation and Embedding
+Executable files are treated as sequences of bytes, with each byte represented as an
+integer ranging from 0 to 255. These bytes are first converted into learned vector
+representations through abyte embedding layer, analogous to word embeddings in
+natural language processing (NLP).
+Temporal Convolutional Network
+The sequences of bytes are then processed through atemporal convolutional network
+(TCN), which applies one-dimensional convolution over the byte sequences to learn
+discriminative patterns characteristic of malware.
+39
+================ PAGE 49 ================
+Global Channel Gating (GCT)
+A key component of the network is theGlobal Channel Gating (GCT)mechanism.
+It computes global statistics over the entire input sequence and selectively empha-
+sizes the most discriminative convolutional channels. This ensures that the network
+can handle sequences of varying lengths while maintaining constant memory usage,
+improving scalability and efficiency.
+Output and Probability Score
+The final network components generate a probability score representing the likeli-
+hood of the input file being malicious. Files with high malware probability scores
+are escalated for further action.
+Dataset and Experimental Setup
+Layer 3 was tested using a dataset derived fromVirusShare 00489, which includes
+real-world malware samples. The malware set consists of 65,537 Windows PE ex-
+ecutables, while the benign set includes 1,171 legitimate executables from trusted
+Windows system directories. The data was split into 80% training and 20% testing
+to ensure generalization.
+The training process was conducted for 10 epochs on anNVIDIA RTX 4070
+GPU, with the best checkpoint occurring at an early epoch, reflecting rapid con-
+vergence and effective learning. The dataset was chosen for its diversity, size, and
+popularity in malware detection studies, making it suitable for evaluating byte-level
+detection capabilities.
+Performance Evaluation and Observations
+The byte-level Layer 3 model demonstrated outstanding performance on the test
+data:
+•Accuracy: 97.19%
+•Precision: 97.05%
+•Recall: 98.16%
+•F1-score: 97.60%
+From the confusion matrix, only 3 malware instances evaded detection among more
+than 13,000 test cases, while 18 benign files were misclassified as malicious.
+This indicates a high success rate for the MalConvGCT-based method in detecting
+malicious executables while maintaining a low false alarm rate. Importantly, because
+this method operates at the byte level rather than relying on signatures or known
+malware families, it has significant potential for detecting zero-day malware, whose
+patterns are unknown.
+The following figure 4.6 illustrates the graph of Precision-Recall curve, highlighting
+the model’s effectiveness in balancing precision and recall during malware detection.
+40
+================ PAGE 50 ================
+Figure 4.6: Precision-Recall curve showing high performance
+The following bar chart of the figure 4.7 displays the performance metrics of the
+MalConvGCT model, showing strong results in accuracy, precision, recall, F1 score,
+and AUC-
+Figure 4.7: Key performance metrics of the MalConvGCT model
+The following figure 4.8 represents the model’s performance over training epochs,
+including AUC, accuracy, loss, and the confusion matrix, demonstrating consistent
+improvements in detection accuracy-
+41
+================ PAGE 51 ================
+Figure 4.8: Performance metrics across training epochs.
+Role of Layer 3 in the Overall Framework
+In the proposed layered escalation framework, Layer 3 represents the critical deep
+dive. Files that have successfully evaded static, behavioral, and previous checks
+are now inspected at the raw byte level, such that stealthy malware, which em-
+ploys techniques such as obfuscation, packing, or novel hiding techniques, is still
+detectable. The byte-level approach makes this framework more resilient in the face
+of ever-evolving malware techniques and provides a foundation upon which zero-day
+threats can be effectively tackled.
+The transition from CNN-based steganography detection to byte-level malware de-
+tection represents a significant enhancement in the framework’s design. The removal
+of reliance on file types and the adoption of self-contained byte-level learning make
+Layer 3 more generic, scalable, and able to detect contemporary and novel malware
+threats.
+4.2.4 Layer 4
+Goal and Constraints
+Layer-4 widens the detection pipeline by introducing network behavior analysis
+(NBA), with the aim of identifying attacks that cannot be detected through static
+file inspection alone. This layer focuses on zero-day threats, fileless malware, and
+living-off-the-land (LOLBins) attacks, which exploit valid tools in abnormal ways.
+Prior research has shown that network anomaly detection is a reliable way to identify
+emerging and resilient threats [17].
+42
+================ PAGE 52 ================
+The following figure 4.9 illustrates the Layer-4 workflow for zero-day and anomaly
+detection in real-time network traffic-
+Figure 4.9: Layer-4 Network Behavior and Zero-Day Detection Flow
+The design goals are:
+•Establish normal behavioral baselinesfor Windows processes.
+•Detect deviations in network activityin near real time.
+•Maintain a low false-positive ratethrough trusted process classification.
+•Deliver timely alerts, with detection latency below 60 seconds.
+System Architecture
+Layer-4 is triggered automatically when earlier layers (Layer-2 and Layer-3) de-
+tect suspicious runtime or image-based anomalies but cannot conclusively label the
+threat. Once triggered, Layer-4 monitors the network activity of the flagged process
+or file, analyzing its outbound connections, communication frequency, and potential
+data exfiltration attempts.
+43
+================ PAGE 53 ================
+This layer acts as the final verification and containment stage, ensuring that even if
+a malicious entity bypasses static, behavioral, or image-level detection, its network
+footprint can still be recognized and isolated.
+The Layer-4 system is organized into four main components:
+1.Data Collection
+•Continuous monitoring of TCP/UDP connections usingnetstat.
+•Mapping of connections to their originating processes.
+•Storage of normalized historical data in a PostgreSQL database.
+2.Behavioral Profiling
+•Analysis of historical data to define typical patterns for each process.
+•Key dimensions include connection frequency, port usage, active hours,
+and destination diversity.
+•K-Means clustering groups processes with similar behaviors (e.g., browsers
+vs. background services).
+•Baselines are stored as JSON profiles describing expected behavior.
+3.Real-Time Detection
+•Live monitoring of current traffic and comparison against baselines.
+•Detection methods include:
+–Statistical anomaly detection (Z-score deviations).
+–Cluster deviation monitoring (process leaving its expected group).
+–Rule-based heuristics (e.g., Microsoft Word launching command shells).
+4.Threat Intelligence Integration
+•Correlation with external feeds (e.g., Abuse.ch, AlienVault).
+•Real-time identification of known malicious IPs and command-and-control
+servers.
+Detection Methodology
+Layer-4 applies multiple complementary strategies:
+•Connection Anomaly Detection:Alerts are triggered when a process
+opens significantly more or fewer connections than its baseline.
+•Port Anomaly Detection:Identifies unexpected port usage that falls out-
+side the normal profile.
+•Cluster Analysis:Detects when a process no longer aligns with its behavioral
+group.
+44
+================ PAGE 54 ================
+•Process Chain Monitoring:Flags unusual parent-child relationships, such
+as an image viewer spawning PowerShell.
+Detecting misuse of native builds through behavioral cues is an emerging area of
+research. Recent works have shown that supervised and pattern-based learning
+can effectively identify Living-off-the-Land (LOLBin) abuse by analyzing command-
+line and process behavior. For instance, NLP-based models have been used to
+recognize malicious command structures, while pattern-generation approaches learn
+typical execution sequences to flag anomalies [21], [32]. These findings support our
+design choice in Layer-4, where process behavior and network context are collectively
+assessed to detect LOLBin-style attacks that leave minimal file traces.
+Machine Learning Implementation
+The machine learning workflow is divided into two phases:
+⇒Training Phase
+–Features extracted from seven days of network history.
+–Data normalized and clustered with K-Means (k= 5).
+–Baselines defined for 28 processes across 3.3 million connections.
+⇒Inference Phase
+–Real-time activity compared with trained clusters.
+–Anomaly scores calculated from deviations.
+–Alerts generated when thresholds are exceeded.
+This design ensures continuous learning while remaining lightweight enough for en-
+terprise release.
+Security Detection Capabilities
+The Layer-4 system enhances detection coverage in the following areas:
+•Living-Off-the-Land Binaries (LOLBins):Misuse of legitimate system
+tools such as PowerShell or Certutil.
+•Data Exfiltration:Abnormal volumes of outbound traffic or connections to
+suspicious hosts.
+•Port Scanning:Sequential probing of ports indicating reconnaissance activ-
+ity.
+•Fileless Attacks:Scripting engines and in-memory execution exhibiting un-
+usual network behavior.
+45
+================ PAGE 55 ================
+Experimental Results
+Testing with simulated attack scenarios demonstrated strong performance:
+•Port scan detection: 100% success.
+•Data exfiltration detection: 100% success.
+•Suspicious process activity: 100% success.
+•False positives:<2% after trusted process filtering.
+•Detection latency:<60 seconds.
+•Overall alert accuracy: 98%.
+These results indicate that Layer-4 is effective in recognizing both common and
+advanced threat patterns while maintaining operational practicality.
+Novel Contributions
+Layer-4 introduces several features that distinguish it from traditional detection
+methods:
+1. Windows-specific profiling, tailored to real process behavior.
+2. Hybrid detection approach, combining clustering, anomaly scoring, and heuris-
+tic rules.
+3. Adaptive monitoring, with continuous updates to behavioral baselines.
+4. Trusted process classification, reducing false alarms by recognizing common
+applications.
+5. Deployable design, with lightweight monitoring suitable for enterprise net-
+works.
+46
+================ PAGE 56 ================
+Chapter 5
+Result Analysis
+5.1 Evaluation Methodology for a Layered Esca-
+lation System
+The system that has been proposed follows a strictly escalated and layered system
+architecture. That is, each layer does not independently provide a definitive classi-
+fication of the malware or benign nature of the code on its own. Rather, each layer
+performs risk assessment and filtering and determines whether a file should be:
+•Pass safely
+•Escalated to the next layer or
+•Be blocked immediately
+It is therefore not possible to use traditional end-to-end accuracy measures for indi-
+vidual layers. Rather, escalation-based performance measures are used to evaluate
+each layer, which is more appropriate for a rule-based and heuristic security ap-
+proach.
+Metrics Used for Layer-wise Evaluation
+For Layer-1, Layer-2 and Layer-4, the following metrics are used:
+•True Positive Escalation Rate (TPER): Percentage of malicious samples
+correctly flagged for escalation.
+•False Escalation Rate (FER): Percentage of benign samples incorrectly
+flagged.
+•Pass-through Rate:Percentage of files allowed to proceed without escala-
+tion.
+For Layer-3, which produces a final anomaly score, standard classification metrics
+(accuracy, precision, recall, F1-score) are used.
+47
+================ PAGE 57 ================
+5.1.1 Layer-1 Evaluation: Static Rule-Based Filtering
+Purpose of Layer-1Layer-1 is designed as a fast static pre-filter, responsible for
+detecting:
+•Known malware patterns
+•Obvious structural anomalies
+•Suspicious metadata and signatures
+During development, VirusTotal API integration was initially explored. However,
+this approach introduced significant latency due to online dependency and rate lim-
+its. As a result, VirusTotal integration was removed, improving speed and making
+the system fully offline capable.
+Dataset Used:
+•Static PE-based dataset inspired by EMBER
+•SOReL-20M-derived PE characteristics
+These datasets are widely used for benchmarking static malware detection research
+and provide a realistic evaluation baseline.
+Here is Layer-1’s Experimental Observation values:
+Metric Value
+True Positive Escalation Rate 94%
+False Escalation Rate 7%
+Pass-through Rate (Benign) 93%
+Processing Time Very Low (milliseconds per file)
+Table 5.1: Layer-1 Performance Metrics (Experimental Observation)
+These values are reported as experimental observations under the proposed system
+configuration, not as direct reproductions of EMBER benchmarks.
+Below here is a Comparison of Layer 1 with Existing Behavioral Work-
+Interpretation:Layer-1 intentionally prioritizes speed and low overhead over ab-
+solute accuracy, ensuring that suspicious files are escalated rather than prematurely
+blocked.
+5.1.2 Layer-2 Evaluation: Behavioral Escalation Analysis
+Purpose of Layer-2Layer-2 monitors runtime behavior to detect malware that
+evades static checks through:
+48
+================ PAGE 58 ================
+Approach Type Dataset Con-
+textStrength Comparison In-
+sight
+EMBER
+LightGBM
+baselineStatic ML EMBER High accuracy
+on known mal-
+wareProposed Layer-1
+trades some accuracy
+for improved speed
+and lower latency
+VirusTotal
+static scan-
+ningSignature-
+basedMulti-vendor Broad malware
+coverageToo slow for real-
+time layered filtering
+and offline deploy-
+ment
+Proposed
+Layer-1Rule-based
+static filterEMBER-like
+datasetsFast, offline, and
+scalableDesigned for early-
+stage triage rather
+than final malware
+verdict
+Table 5.2: Comparison of Layer-1 with traditional static malware detection methods
+•Packing
+•Delayed execution
+•Benign looking metadata
+Dataset Used
+•Custom sandbox execution traces
+•Evaluation context aligned with Cuckoo Sandbox-based behavioral datasets
+Below are the Layer-2 performance metrics for behavioral malware de-
+tection.)
+Metric Value
+True Positive Escalation Rate 91%
+False Escalation Rate 8%
+Additional Malware Caught Beyond
+Layer-1Significant
+Execution Overhead Moderate
+Table 5.3: Layer-2 performance metrics: behavioral analysis and malware detection
+results
+The below table shows Comparison with Existing Behavioral Work
+Interpretation:Layer-2 improves detection of evasive malware but is not intended
+to make a final decision, reducing the risk of false blocking.
+49

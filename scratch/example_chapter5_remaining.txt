@@ -1,0 +1,319 @@
+================ PAGE 55 ================
+Experimental Results
+Testing with simulated attack scenarios demonstrated strong performance:
+•Port scan detection: 100% success.
+•Data exfiltration detection: 100% success.
+•Suspicious process activity: 100% success.
+•False positives:<2% after trusted process filtering.
+•Detection latency:<60 seconds.
+•Overall alert accuracy: 98%.
+These results indicate that Layer-4 is effective in recognizing both common and
+advanced threat patterns while maintaining operational practicality.
+Novel Contributions
+Layer-4 introduces several features that distinguish it from traditional detection
+methods:
+1. Windows-specific profiling, tailored to real process behavior.
+2. Hybrid detection approach, combining clustering, anomaly scoring, and heuris-
+tic rules.
+3. Adaptive monitoring, with continuous updates to behavioral baselines.
+4. Trusted process classification, reducing false alarms by recognizing common
+applications.
+5. Deployable design, with lightweight monitoring suitable for enterprise net-
+works.
+46
+================ PAGE 56 ================
+Chapter 5
+Result Analysis
+5.1 Evaluation Methodology for a Layered Esca-
+lation System
+The system that has been proposed follows a strictly escalated and layered system
+architecture. That is, each layer does not independently provide a definitive classi-
+fication of the malware or benign nature of the code on its own. Rather, each layer
+performs risk assessment and filtering and determines whether a file should be:
+•Pass safely
+•Escalated to the next layer or
+•Be blocked immediately
+It is therefore not possible to use traditional end-to-end accuracy measures for indi-
+vidual layers. Rather, escalation-based performance measures are used to evaluate
+each layer, which is more appropriate for a rule-based and heuristic security ap-
+proach.
+Metrics Used for Layer-wise Evaluation
+For Layer-1, Layer-2 and Layer-4, the following metrics are used:
+•True Positive Escalation Rate (TPER): Percentage of malicious samples
+correctly flagged for escalation.
+•False Escalation Rate (FER): Percentage of benign samples incorrectly
+flagged.
+•Pass-through Rate:Percentage of files allowed to proceed without escala-
+tion.
+For Layer-3, which produces a final anomaly score, standard classification metrics
+(accuracy, precision, recall, F1-score) are used.
+47
+================ PAGE 57 ================
+5.1.1 Layer-1 Evaluation: Static Rule-Based Filtering
+Purpose of Layer-1Layer-1 is designed as a fast static pre-filter, responsible for
+detecting:
+•Known malware patterns
+•Obvious structural anomalies
+•Suspicious metadata and signatures
+During development, VirusTotal API integration was initially explored. However,
+this approach introduced significant latency due to online dependency and rate lim-
+its. As a result, VirusTotal integration was removed, improving speed and making
+the system fully offline capable.
+Dataset Used:
+•Static PE-based dataset inspired by EMBER
+•SOReL-20M-derived PE characteristics
+These datasets are widely used for benchmarking static malware detection research
+and provide a realistic evaluation baseline.
+Here is Layer-1’s Experimental Observation values:
+Metric Value
+True Positive Escalation Rate 94%
+False Escalation Rate 7%
+Pass-through Rate (Benign) 93%
+Processing Time Very Low (milliseconds per file)
+Table 5.1: Layer-1 Performance Metrics (Experimental Observation)
+These values are reported as experimental observations under the proposed system
+configuration, not as direct reproductions of EMBER benchmarks.
+Below here is a Comparison of Layer 1 with Existing Behavioral Work-
+Interpretation:Layer-1 intentionally prioritizes speed and low overhead over ab-
+solute accuracy, ensuring that suspicious files are escalated rather than prematurely
+blocked.
+5.1.2 Layer-2 Evaluation: Behavioral Escalation Analysis
+Purpose of Layer-2Layer-2 monitors runtime behavior to detect malware that
+evades static checks through:
+48
+================ PAGE 58 ================
+Approach Type Dataset Con-
+textStrength Comparison In-
+sight
+EMBER
+LightGBM
+baselineStatic ML EMBER High accuracy
+on known mal-
+wareProposed Layer-1
+trades some accuracy
+for improved speed
+and lower latency
+VirusTotal
+static scan-
+ningSignature-
+basedMulti-vendor Broad malware
+coverageToo slow for real-
+time layered filtering
+and offline deploy-
+ment
+Proposed
+Layer-1Rule-based
+static filterEMBER-like
+datasetsFast, offline, and
+scalableDesigned for early-
+stage triage rather
+than final malware
+verdict
+Table 5.2: Comparison of Layer-1 with traditional static malware detection methods
+•Packing
+•Delayed execution
+•Benign looking metadata
+Dataset Used
+•Custom sandbox execution traces
+•Evaluation context aligned with Cuckoo Sandbox-based behavioral datasets
+Below are the Layer-2 performance metrics for behavioral malware de-
+tection.)
+Metric Value
+True Positive Escalation Rate 91%
+False Escalation Rate 8%
+Additional Malware Caught Beyond
+Layer-1Significant
+Execution Overhead Moderate
+Table 5.3: Layer-2 performance metrics: behavioral analysis and malware detection
+results
+The below table shows Comparison with Existing Behavioral Work
+Interpretation:Layer-2 improves detection of evasive malware but is not intended
+to make a final decision, reducing the risk of false blocking.
+49
+================ PAGE 59 ================
+Work Data
+TypePlatform Key Idea Relation to Pro-
+posed Layer-2
+Cuckoo-based
+dynamic analy-
+sisSandbox
+logsWindows Observe true
+runtime behav-
+iorProposed ap-
+proach follows this
+paradigm
+API call se-
+quence analysisAPI traces Windows Detect malicious
+execution se-
+quencesSimilar escalation
+logic
+Proposed Layer-
+2Behavioral
+rules +
+heuristicsWindows Escalate suspi-
+cious behaviorOptimized for
+pipeline integration
+Table 5.4: Comparison of existing dynamic analysis techniques and the proposed
+Layer-2 approach
+5.1.3 Layer-3 Evaluation: Byte-Level Self-Supervised Detection
+Design EvolutionInitially, Layer-3 used a CNN-based steganography detection
+model to detect hidden payloads inside image files. While effective for specific
+steganographic algorithms, this approach failed to work across:
+•Different embedding techniques
+•Non-image file formats
+To overcome this limitation, Layer-3 was redesigned as a byte-level self-supervised
+anomaly detection system, operating directly on raw bytes.
+Test Dataset Used
+•Custom byte-level dataset
+•7,455 malware samples
+•5,320 benign files
+•Multiple file types
+Layer 3’s Actual Measured Results are Shown here-
+Metric Value
+Accuracy 97.19%
+Precision 97.05%
+Recall 98.16%
+F1-score 97.60%
+Benign Accuracy 96.17%
+False Positive Rate 3.83%
+Table 5.5: Layer-3 performance results for byte-level malware detection
+50
+================ PAGE 60 ================
+Below is a comparison of the proposed Layer-3 approach with existing
+byte-level techniques
+Approach Learning
+TypeInput File
+ScopeZero-day Ca-
+pability
+MalConv Supervised Raw bytes EXE only Limited
+Feature-
+based
+static
+modelsSupervised Extracted fea-
+turesEXE fo-
+cusedWeak
+Proposed
+Layer-3Self-
+supervisedRaw bytes Universal Strong
+Table 5.6: Comparison of existing byte-level malware detection methods
+Interpretation:By eliminating dependence on file structure and labels, Layer-3
+provides strong detection of previously unseen malware.
+5.1.4 Layer-4 Evaluation: Network-Based Escalation Detection
+Purpose of Layer-4Layer-4 monitors outbound and inbound network connec-
+tions. Even when malware evades file-level detection, it often exposes itself through
+abnormal communication patterns.
+Datasets Used
+•CIC-IDS2017
+•UNSW-NB15
+•Custom simulated malicious connections
+Here is Layer-4 Performance (Experimental Observation:)
+Metric Value
+True Positive Escalation Rate 92%
+False Escalation Rate 6%
+Zero-day Sensitivity High
+Table 5.7: Layer-4 performance results based on network-level monitoring
+The Comparison with Network IDS Work is shown in this table-
+Interpretation:Layer-4 provides strong zero-day detection and integrates addi-
+tional context beyond traditional network intrusion detection systems.
+Below is a chart comparing the true positive and false positive escalation rates
+across Layer-1 (Static Rules), Layer-2 (Behavioral), and Layer-4 (Network) detection
+layers.
+51
+================ PAGE 61 ================
+Dataset Focus Strength Comparison
+CIC-IDS2017
+baselinesNetwork
+attacksWidely
+used
+benchmarkProvides contextual
+reference for Layer-4
+evaluation
+UNSW-NB15
+studiesMixed at-
+tacksRealistic
+network
+flowsComparable detection
+rates in IDS research
+Proposed Layer-
+4Endpoint-
+aware
+monitoringStrong
+zero-day
+signalIntegrates context
+beyond pure network
+IDS
+Table 5.8: Comparison of the proposed Layer-4 with existing network intrusion
+detection datasets
+Figure 5.1: Layer-wise escalation performance metrics for true and false positive
+escalation rates.
+5.1.5 Whole Pipeline Evaluation and Comparison
+Custom End-to-End DatasetThe full pipeline was evaluated using an author-
+created dataset consisting of:
+•Malware collected from multiple public and private sources
+•Multiple file formats
+•Self-created malware samples
+•Zero-day samples undetected by several antivirus engines
+The Overall Pipeline Performance is presented here-
+52
+================ PAGE 62 ================
+Metric Value
+Overall Detection Accuracy 96%
+Zero-day Detection Capability Strong
+False Positive Rate 4%
+Table 5.9: Overall performance results of the proposed multi-layer malware detection
+framework
+The Pipeline Comparison with Existing Systems is shown here-
+System Architecture Strength Limitation Comparison
+Outcome
+VirusTotal Cloud-based,
+signature-heavyBroad malware
+coverageSlow response
+and no local be-
+havioral contextCannot operate
+offline
+Traditional
+AntivirusSignature-based
+with heuristicsMature and
+widely deployed
+ecosystemLimited effec-
+tiveness against
+zero-day mal-
+wareRestricted zero-
+day coverage
+Proposed
+PipelineMulti-layer es-
+calation frame-
+workMulti-vector
+zero-day defenseHigher system
+complexityStrong
+endpoint-level
+protection
+Table 5.10: Comparison of the proposed system with existing malware detection
+solutions
+Here is a radar chart comparing key system capabilities, including speed, accuracy,
+scalability, multi-vector defense, offline capability, and zero-day detection across
+different malware detection systems:
+53
+================ PAGE 63 ================
+Figure 5.2: Comparison of system capabilities across our multi-layer pipeline, tra-
+ditional AV, and VirusTotal
+5.2 Analysis of Design Solutions
+The architecture used in the proposed system is a layer escalating architecture to
+survive the sophomores and complications of contemporary attacks by malwares.
+Rather than depending on the single detection technology, the framework separates
+the detection process into several layers, and each of them is aimed at various areas
+of malware behavior. This she is decided upon because present-day malware attacks
+are engineered to circumvent individual detecting systems through taking advantage
+of their weaknesses. Layer-1 of the system is made efficient with regard to early
+filtering. The layer employs statistical rules and heuristics to quickly filter clean
+files and tag files that are classified as being suspicious or malicious. This reduces
+the demands of processing of. the following layers and assists the system to be
+responsive even to the presence. of high file activity.
+Layer-2 presents an improvement of the detection capabilities by adding to them
+the runtime behavioral analysis. The majority of the modern malware variants are
+designed in such a manner that they are able to bypass identification by means of
+static analysis and only realized under malicious activity runtime. By the study of
+behavioral characteristics like process and execution behavior, Layer-2 can imple-
+ment the identification of malware that cannot be identified through the use of a
+static analysis. Layer 3 focuses on the anomalies on a bit-level level by means of
+54
