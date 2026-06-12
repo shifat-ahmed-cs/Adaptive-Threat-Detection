@@ -1,0 +1,26 @@
+\nomenclatureentry{aAI@[{AI}]\begingroup Artificial Intelligence\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aAPI@[{API}]\begingroup Application Programming Interface\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aAST@[{AST}]\begingroup Abstract Syntax Tree\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aAUC@[{AUC}]\begingroup Area Under the ROC Curve\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aBiLSTM@[{BiLSTM}]\begingroup Bidirectional Long Short-Term Memory\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aCI/CD@[{CI/CD}]\begingroup Continuous Integration and Continuous Deployment\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aCNN@[{CNN}]\begingroup Convolutional Neural Network\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aCPU@[{CPU}]\begingroup Central Processing Unit\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aDAST@[{DAST}]\begingroup Dynamic Application Security Testing\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aDL@[{DL}]\begingroup Deep Learning\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aFN@[{FN}]\begingroup False Negative\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aFP@[{FP}]\begingroup False Positive\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aGAT@[{GAT}]\begingroup Graph Attention Network\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aGCN@[{GCN}]\begingroup Graph Convolutional Network\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aGNN@[{GNN}]\begingroup Graph Neural Network\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aGPU@[{GPU}]\begingroup Graphics Processing Unit\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aIDE@[{IDE}]\begingroup Integrated Development Environment\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aML@[{ML}]\begingroup Machine Learning\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aPE@[{PE}]\begingroup Portable Executable\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aPR@[{PR}]\begingroup Precision-Recall\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aROC@[{ROC}]\begingroup Receiver Operating Characteristic\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aSAST@[{SAST}]\begingroup Static Application Security Testing\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aSTRIDE@[{STRIDE}]\begingroup Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aTN@[{TN}]\begingroup True Negative\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aTP@[{TP}]\begingroup True Positive\nomeqref {0}|nompageref}{xi}
+\nomenclatureentry{aXAI@[{XAI}]\begingroup Explainable Artificial Intelligence\nomeqref {0}|nompageref}{xi}

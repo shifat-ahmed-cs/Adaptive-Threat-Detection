@@ -84,3 +84,19 @@ temp/
 
 # Ignore server launcher containing token
 run_server.bat
+
+# LaTeX
+*.aux
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.nlo
+*.nls
+*-SAVE-ERROR
+*.bbl
